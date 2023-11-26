@@ -2,7 +2,6 @@ import csv
 import sys
 import os
 
-
 def process_csv(input_file, output_dir):
     with open(input_file, mode='r', encoding='utf-8') as infile:
         data = list(csv.reader(infile))
@@ -13,7 +12,9 @@ def process_csv(input_file, output_dir):
         if row and row[0].isdigit():
             processed_data.append(row)
         elif "断面名称" in row:
-            processed_data.append([f'chainage{chainage_count}'])
+            # 使用zfill确保chainage_count总是两位数
+            chainage_label = f'chainage_{str(chainage_count).zfill(2)}'
+            processed_data.append([chainage_label])
             chainage_count += 1
 
     # 构建输出文件的路径
@@ -21,7 +22,6 @@ def process_csv(input_file, output_dir):
     with open(output_file, mode='w', encoding='utf-8', newline='') as outfile:
         writer = csv.writer(outfile)
         writer.writerows(processed_data)
-
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
