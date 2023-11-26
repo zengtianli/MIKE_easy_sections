@@ -12,12 +12,12 @@ echo "Copying specific csv files to csv_sections directory..."
 mkdir -p ../csv_sections
 find ../csv_files/ -name '*断面测量数据表.csv' | xargs -I {} cp {} ../csv_sections
 
-# 3. 处理csv_sections目录中的所有csv文件
-echo "Processing csv files in csv_sections directory..."
-python csv_distill.py ../csv_sections/*.csv
-
-# 4. 重命名csv_sections目录中的文件
+# 3. 重命名csv_sections目录中的文件
 echo "Renaming files in csv_sections directory..."
 python csv_rn_cap.py
+
+# 4. 处理csv_sections目录中的所有csv文件. 生成的文件将保存在csv_distiledl目录中
+echo "Processing csv files in csv_sections directory..."
+python csv_distill.py ../csv_sections/*.csv
 
 echo "All tasks completed."
