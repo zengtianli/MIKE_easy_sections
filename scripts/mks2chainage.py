@@ -24,7 +24,8 @@ def process_file(file_path, csv_file_path):
 
     with open(csv_file_path, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(['Branch Name', 'Chainage', 'Number'])  # Header row
+        csvwriter.writerow(
+            ['sections', 'branch', 'chainage_n', 'chainage_v'])  # Header row
 
         for branch_name, chainages in data.items():
             for chainage in chainages:
