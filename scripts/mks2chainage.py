@@ -28,8 +28,10 @@ def process_file(file_path, csv_file_path):
 
         for branch_name, chainages in data.items():
             for chainage in chainages:
+                # Updated line
+                formatted_chainage = f"chainage_{chainage[0]:02d}"
                 csvwriter.writerow(
-                    [branch_name, f"chainage {chainage[0]}", chainage[1]])
+                    [branch_name, formatted_chainage, chainage[1]])
 
 
 if __name__ == "__main__":
