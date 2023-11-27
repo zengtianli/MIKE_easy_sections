@@ -30,6 +30,10 @@ done
 # Handle virtual cross sections, first virtual_start.py, then virtual_end.py, finally virtual_end_update.py
 # virtual_start.py read files in txt_files, and save the result at txt_virtual_start
 echo "🚀 Handling virtual start sections..."
+
+python get_virtual_end.py
+source sort_all_ev.sh
+
 python virtual_start.py
 
 # virtual_end.py read files in txt_virtual_start, and save the result at txt_virtual_end
