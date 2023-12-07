@@ -11,3 +11,10 @@ csv_sections
 csv_files
 csv_files
 00_chg_files
+.eggs
+.eggs
+__pycache__
+build/mike_gui
+dist
+dist
+build/mike_gui
