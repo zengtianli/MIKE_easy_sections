@@ -18,3 +18,8 @@ build/mike_gui
 dist
 dist
 build/mike_gui
+00_scripts
+__pycache__
+processed_data
+processed_data
+__pycache__
