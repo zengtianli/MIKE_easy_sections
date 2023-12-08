@@ -1,6 +1,9 @@
 import csv
 import sys
 import os
+BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
+input_file_path = os.path.join(BASE_DIR, 'secss.txt')  # 定义输入文件路径
+output_csv_file = os.path.join(BASE_DIR, 'processed_data', 'chainage.csv')
 
 
 def load_chainage_data(chainage_file):
@@ -48,8 +51,7 @@ def main():
     chainage_file = os.path.join(
         '../00_chg_files/', os.path.basename(section_file).replace('.csv', '_chg.csv'))
     output_dir = '../processed_data/inserted_files'
-    if not os.path.exists(output_dir):
-        os.mkdir(output_dir)
+    os.makedirs(output_dir, exist_ok=True)
     prefix = os.path.basename(section_file).split('_')[0]
     chainage_data = load_chainage_data(chainage_file)
     process_section_file(section_file, chainage_data, output_dir, prefix)

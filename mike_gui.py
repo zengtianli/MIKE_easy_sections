@@ -5,6 +5,7 @@ import os
 import xlsx2csv_all  # 导入你的 xlsx 转换脚本
 import csv_rn_cap  # 导入你的 csv 重命名脚本
 import mks2chainage  # 导入你的 mks2chainage 脚本
+import chg_split  # 导入你的 chg_split 脚本
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
@@ -44,14 +45,23 @@ def run_csv_rename_script():
 def run_mks2chainage_script():
     input_file_path = os.path.join(BASE_DIR, 'secss.txt')  # 定义输入文件路径
     sys.stdout = EmittingStream(output_area)
-    # debug input_file_path
-    # print(input_file_path)
     try:
         mks2chainage.main(input_file_path)
         QMessageBox.information(
             window, "完成", "MIKE 断面文件转为里程csv文件完成,保存为chainage.csv！")
     except Exception as e:
         QMessageBox.critical(window, "错误", f"mks2chainage 脚本执行过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__
+
+
+def run_chg_split():
+    sys.stdout = EmittingStream(output_area)
+    try:
+        chg_split.main()
+        QMessageBox.information(
+            window, "完成", "根据chainage.csv文件分割断面完成！保存在chg_files文件夹中！")
+    except Exception as e:
+        QMessageBox.critical(window, "错误", f"chg_split 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
 
@@ -74,9 +84,13 @@ csv_rename_button = QPushButton('Rename CSV Files')
 csv_rename_button.clicked.connect(run_csv_rename_script)
 layout.addWidget(csv_rename_button)
 
-mks2chainage_button = QPushButton('Run mks2chainage Script')
+mks2chainage_button = QPushButton('Convert MIKE txt to chainage.csv')
 mks2chainage_button.clicked.connect(run_mks2chainage_script)
 layout.addWidget(mks2chainage_button)
+
+chg_split_button = QPushButton('Split chainage.csv to sections')
+chg_split_button.clicked.connect(run_chg_split)
+layout.addWidget(chg_split_button)
 
 window.setLayout(layout)
 window.show()

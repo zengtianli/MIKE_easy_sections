@@ -3,7 +3,6 @@ import os
 import sys
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
-
 input_file_path = os.path.join(BASE_DIR, 'secss.txt')  # 定义输入文件路径
 output_csv_file = os.path.join(BASE_DIR, 'processed_data', 'chainage.csv')
 
@@ -51,4 +50,3 @@ if __name__ == '__main__':
         sys.exit(1)
 
     main(sys.argv[1])
-
