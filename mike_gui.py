@@ -6,6 +6,7 @@ import xlsx2csv_all  # 导入你的 xlsx 转换脚本
 import csv_rn_cap  # 导入你的 csv 重命名脚本
 import mks2chainage  # 导入你的 mks2chainage 脚本
 import chg_split  # 导入你的 chg_split 脚本
+import chg_insert  # 导入你的 chg_insert 脚本
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
@@ -65,6 +66,17 @@ def run_chg_split():
     sys.stdout = sys.__stdout__
 
 
+def run_chg_insert():
+    sys.stdout = EmittingStream(output_area)
+    try:
+        chg_insert.main()
+        QMessageBox.information(
+            window, "完成", "根据chainage.csv文件分割断面完成！保存在chg_files文件夹中！")
+    except Exception as e:
+        QMessageBox.critical(window, "错误", f"chg_split 脚本执行过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__
+
+
 app = QApplication(sys.argv)
 
 window = QWidget()
@@ -91,6 +103,10 @@ layout.addWidget(mks2chainage_button)
 chg_split_button = QPushButton('Split chainage.csv to sections')
 chg_split_button.clicked.connect(run_chg_split)
 layout.addWidget(chg_split_button)
+
+chg_insert_button = QPushButton('insert')
+chg_insert_button.clicked.connect(run_chg_insert)
+layout.addWidget(chg_insert_button)
 
 window.setLayout(layout)
 window.show()

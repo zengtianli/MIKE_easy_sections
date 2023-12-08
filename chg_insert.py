@@ -1,9 +1,6 @@
 import csv
 import sys
 import os
-BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
-input_file_path = os.path.join(BASE_DIR, 'secss.txt')  # 定义输入文件路径
-output_csv_file = os.path.join(BASE_DIR, 'processed_data', 'chainage.csv')
 
 
 def load_chainage_data(chainage_file):
@@ -12,9 +9,8 @@ def load_chainage_data(chainage_file):
         reader = csv.reader(file)
         next(reader)  # 跳过标题行
         for row in reader:
-            if row[0] != 'null':
-                # sections -> (branch, chainage_n, chainage_v)
-                chainage_data[row[0]] = (row[1], row[2], row[3])
+            if row[1] != 'virtual':
+                chainage_data[row[1]] = (row[2], row[3], row[4])
     return chainage_data
 
 
@@ -43,20 +39,26 @@ def process_section_file(section_file, chainage_data, output_dir, prefix):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python chg_insert.py <section_file>")
-        sys.exit(1)
-    section_file = sys.argv[1]
-    # 从输入文件名中构造chainage文件名
-    chainage_file = os.path.join(
-        '../00_chg_files/', os.path.basename(section_file).replace('.csv', '_chg.csv'))
-    output_dir = '../processed_data/inserted_files'
-    os.makedirs(output_dir, exist_ok=True)
-    prefix = os.path.basename(section_file).split('_')[0]
-    chainage_data = load_chainage_data(chainage_file)
-    process_section_file(section_file, chainage_data, output_dir, prefix)
-    print(f"Processed file: {section_file} stored in {output_dir}")
+    input_dir = './processed_data/csv_sections/'
+    chainage_files_dir = './processed_data/chg_files'
+    output_dir = './processed_data/inserted_files'
+
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    for section_file in os.listdir(input_dir):
+        if section_file.endswith('.csv'):
+            full_section_file_path = os.path.join(input_dir, section_file)
+            chainage_file = os.path.join(
+                chainage_files_dir, os.path.basename(section_file).replace('.csv', '_chg.csv'))
+            prefix = os.path.basename(section_file).split('_')[0]
+            chainage_data = load_chainage_data(chainage_file)
+            process_section_file(full_section_file_path,
+                                 chainage_data, output_dir, prefix)
+            print(
+                f"Processed file: {full_section_file_path} stored in {output_dir}")
 
 
 if __name__ == "__main__":
     main()
+
