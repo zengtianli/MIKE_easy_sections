@@ -1,6 +1,7 @@
 import csv
 import sys
 import os
+BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def load_chainage_data(chainage_file):
@@ -39,9 +40,10 @@ def process_section_file(section_file, chainage_data, output_dir, prefix):
 
 
 def main():
-    input_dir = './processed_data/csv_sections/'
-    chainage_files_dir = './processed_data/chg_files'
-    output_dir = './processed_data/inserted_files'
+    # input_dir = './processed_data/csv_sections/'
+    input_dir = os.path.join(BASE_DIR, 'processed_data', 'csv_sections')
+    chainage_files_dir = os.path.join(BASE_DIR, 'processed_data', 'chg_files')
+    output_dir = os.path.join(BASE_DIR,  'processed_data', 'inserted_files')
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)

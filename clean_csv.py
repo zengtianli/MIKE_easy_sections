@@ -1,6 +1,8 @@
+import glob
 import csv
 import sys
 import os
+BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def clean_csv(input_file, output_file):
@@ -29,18 +31,17 @@ def clean_csv(input_file, output_file):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python clean_csv.py <input_file>")
-        sys.exit(1)
+    input_dir = os.path.join(BASE_DIR, 'processed_data', 'inserted_files')
+    output_dir = os.path.join(BASE_DIR,  'processed_data', 'inst_cle_files')
 
-    input_file = sys.argv[1]
-    output_dir = os.path.join(os.path.dirname(
-        input_file), '../inst_cle_files')
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    output_file = os.path.join(output_dir, os.path.basename(input_file))
-    clean_csv(input_file, output_file)
-    print(f"Cleaned data saved to: {output_file}")
+
+    for input_file in glob.glob(os.path.join(input_dir, '*.csv')):
+        print(f"🧼 Cleaning {input_file}...")
+        output_file = os.path.join(output_dir, os.path.basename(input_file))
+        clean_csv(input_file, output_file)
+        print(f"Cleaned data saved to: {output_file}")
 
 
 if __name__ == "__main__":
