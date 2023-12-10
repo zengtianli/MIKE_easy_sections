@@ -8,6 +8,7 @@ import mks2chainage  # 导入你的 mks2chainage 脚本
 import chg_split  # 导入你的 chg_split 脚本
 import chg_insert  # 导入你的 chg_insert 脚本
 import clean_csv  # 导入你的 clean_csv 脚本
+import get_virtual_end  # 导入你的 get_virtual_end 脚本
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
