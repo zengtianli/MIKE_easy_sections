@@ -9,6 +9,7 @@ import chg_split  # 导入你的 chg_split 脚本
 import chg_insert  # 导入你的 chg_insert 脚本
 import clean_csv  # 导入你的 clean_csv 脚本
 import get_virtual_end  # 导入你的 get_virtual_end 脚本
+import virtual_start
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
@@ -86,18 +87,27 @@ def run_clean_csv():
         QMessageBox.information(
             window, "完成", "根据chainage files in chg_files 插入相关断面信息到对应文件 保存在 inserted_files 文件夹中！")
     except Exception as e:
-        QMessageBox.critical(window, "错误", f"chg_split 脚本执行过程中出现错误：{e}")
+        QMessageBox.critical(window, "错误", f"run_clean_csv 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
-# add get_cirtual_end function
 def run_get_virtual_end():
     sys.stdout = EmittingStream(output_area)
     try:
         get_virtual_end.main()
         QMessageBox.information(
-            window, "完成", "根据chainage files in chg_files 插入相关断面信息到对应文件 保存在 inserted_files 文件夹中！")
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中 ！")
     except Exception as e:
-        QMessageBox.critical(window, "错误", f"chg_split 脚本执行过程中出现错误：{e}")
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__
+
+def run_virtual_start():
+    sys.stdout = EmittingStream(output_area)
+    try:
+        virtual_start.main()
+        QMessageBox.information(
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
+    except Exception as e:
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
 app = QApplication(sys.argv)
@@ -138,6 +148,10 @@ layout.addWidget(clean_csv_button)
 get_virtual_end_button = QPushButton('get virtual end')
 get_virtual_end_button.clicked.connect(run_get_virtual_end)
 layout.addWidget(get_virtual_end_button)
+
+virtual_start_button = QPushButton('virtual start')
+virtual_start_button.clicked.connect(run_virtual_start)
+layout.addWidget(virtual_start_button)
 
 window.setLayout(layout)
 window.show()

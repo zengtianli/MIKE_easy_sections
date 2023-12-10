@@ -1,6 +1,10 @@
 import os
 import glob
+import sys
 
+BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
+input_dir = os.path.join(BASE_DIR, 'processed_data', 'txt_files')
+output_dir = os.path.join(BASE_DIR, 'processed_data', 'txt_virtual_start')
 
 def insert_virtual_section(input_file, output_dir):
     # 读取原始文件内容
@@ -39,8 +43,8 @@ def process_directory(input_dir, output_dir):
 
 
 def main():
-    input_dir = "../processed_data/txt_files"
-    output_dir = "../processed_data/txt_virtual_start"
+    # input_dir = "../processed_data/txt_files"
+    # output_dir = "../processed_data/txt_virtual_start"
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
     process_directory(input_dir, output_dir)

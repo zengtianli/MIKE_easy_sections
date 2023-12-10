@@ -2,6 +2,10 @@ import csv
 import sys
 import os
 
+BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
+txt_folder = os.path.join(BASE_DIR, 'processed_data', 'txt_files')
+csv_folder = os.path.join(BASE_DIR, 'processed_data', 'inst_cle_files')
+
 
 def parse_csv_line(row):
     """解析CSV文件中的一行，返回坐标值和标签"""
@@ -95,19 +99,17 @@ def convert_csv_to_txt(csv_path, txt_path):
                 branch, chainage, tagged_coordinates))
 
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python mkcc.py <csv_file>")
-        sys.exit(1)
-    csv_file = sys.argv[1]
-    txt_file = csv_file.replace('.csv', '.txt')
-    txt_folder = "../processed_data/txt_files"
-    if not os.path.exists(txt_folder):
-        os.makedirs(txt_folder)
-    txt_file = os.path.join(txt_folder, os.path.basename(txt_file))
-    convert_csv_to_txt(csv_file, txt_file)
-    print(f"Converted {csv_file} to {txt_file}")
+import glob
 
+def main():
+    csv_files = glob.glob(csv_folder + '/*.csv')
+    for csv_file in csv_files:
+        txt_file = csv_file.replace('.csv', '.txt')
+        if not os.path.exists(txt_folder):
+            os.makedirs(txt_folder)
+        txt_file = os.path.join(txt_folder, os.path.basename(txt_file))
+        convert_csv_to_txt(csv_file, txt_file)
+        print(f"Converted {csv_file} to {txt_file}")
 
 if __name__ == "__main__":
     main()

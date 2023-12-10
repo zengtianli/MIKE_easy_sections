@@ -22,6 +22,9 @@ def extract_virtual_chainage(input_file):
     return virtual_chainage
 
 
+
+import subprocess
+
 def main():
     all_virtual_chainage = []
 
@@ -37,6 +40,8 @@ def main():
 
     print(f"Virtual chainage extracted to {output_file}")
 
+    subprocess.run(['sed', '-i', '', 's/ //g', output_file], check=True)
+    subprocess.run(['sort', '-t,', '-k1,1', output_file, '-o', output_file], check=True)
 
 if __name__ == "__main__":
     main()
