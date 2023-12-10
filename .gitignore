@@ -23,3 +23,4 @@ __pycache__
 processed_data
 processed_data
 __pycache__
+.DS_Store

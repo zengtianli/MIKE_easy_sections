@@ -88,6 +88,16 @@ def run_clean_csv():
         QMessageBox.critical(window, "错误", f"chg_split 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
+# add get_cirtual_end function
+def run_get_virtual_end():
+    sys.stdout = EmittingStream(output_area)
+    try:
+        get_virtual_end.main()
+        QMessageBox.information(
+            window, "完成", "根据chainage files in chg_files 插入相关断面信息到对应文件 保存在 inserted_files 文件夹中！")
+    except Exception as e:
+        QMessageBox.critical(window, "错误", f"chg_split 脚本执行过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__
 
 app = QApplication(sys.argv)
 
@@ -123,6 +133,10 @@ layout.addWidget(chg_insert_button)
 clean_csv_button = QPushButton('clean csv')
 clean_csv_button.clicked.connect(run_clean_csv)
 layout.addWidget(clean_csv_button)
+
+get_virtual_end_button = QPushButton('get virtual end')
+get_virtual_end_button.clicked.connect(run_get_virtual_end)
+layout.addWidget(get_virtual_end_button)
 
 window.setLayout(layout)
 window.show()

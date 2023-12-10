@@ -5,10 +5,21 @@ BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def load_chainage_data(chainage_file):
+    """
+    Load chainage data from a file and return a dictionary.
+
+    Args:
+        chainage_file (str): The path to the chainage file.
+
+    Returns:
+        dict: A dictionary containing the chainage data, where the keys are the chainage IDs
+              and the values are tuples containing the corresponding data.
+
+    """
     chainage_data = {}
     with open(chainage_file, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
-        next(reader)  # 跳过标题行
+        next(reader)  # Skip the header row
         for row in reader:
             if row[1] != 'virtual':
                 chainage_data[row[1]] = (row[2], row[3], row[4])
@@ -29,8 +40,7 @@ def process_section_file(section_file, chainage_data, output_dir, prefix):
                 output_data[branch].append(row)  # 添加断面名称行
                 output_data[branch].append(
                     [f"{current_section},{branch},{chainage_n},{chainage_v}"])  # 添加chainage行
-        elif row:
-            output_data[branch].append(row)  # 添加其他数据行
+        elif row: output_data[branch].append(row)  # 添加其他数据行
     for branch, data in output_data.items():
         output_file = os.path.join(
             output_dir, f"{prefix}_{branch}.csv")
@@ -40,7 +50,6 @@ def process_section_file(section_file, chainage_data, output_dir, prefix):
 
 
 def main():
-    # input_dir = './processed_data/csv_sections/'
     input_dir = os.path.join(BASE_DIR, 'processed_data', 'csv_sections')
     chainage_files_dir = os.path.join(BASE_DIR, 'processed_data', 'chg_files')
     output_dir = os.path.join(BASE_DIR,  'processed_data', 'inserted_files')
