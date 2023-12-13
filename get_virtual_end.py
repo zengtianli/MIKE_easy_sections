@@ -5,7 +5,6 @@ import sys
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 input_dir = os.path.join(BASE_DIR, 'processed_data', 'chg_files')
-# output_dir = os.path.join(BASE_DIR,  'processed_data', 'all_end_virtuals.csv')
 output_file = os.path.join(BASE_DIR,'processed_data' ,'all_end_virtuals.csv')  # Define output_file variable
 
 def extract_virtual_chainage(input_file):
@@ -18,7 +17,7 @@ def extract_virtual_chainage(input_file):
             if row[1] == 'virtual' and row[4] != '0.000':
                 print(f"Found virtual end at {row[3]}")
                 virtual_chainage.append(
-                    [os.path.basename(input_file).replace('_chg.csv', ''), row[1], row[3]])
+                    [os.path.basename(input_file).replace('_chg.csv', ''), row[2], row[3]])
     return virtual_chainage
 
 

@@ -1,12 +1,17 @@
 import pandas as pd
 import os
+import sys
 # 设置输入和输出文件夹的路径
-input_folder = '../processed_data/txt_virtual_start'
-output_folder = '../processed_data/txt_virtual_end'
+BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
+
+input_folder = os.path.join(BASE_DIR, 'processed_data', 'txt_virtual_start')
+output_folder = os.path.join(BASE_DIR, 'processed_data', 'txt_virtual_end')
+readcsvfile = os.path.join(BASE_DIR, 'processed_data', 'all_end_virtuals.csv')
 # 确保输出文件夹存在
-os.makedirs(output_folder, exist_ok=True)
+if not os.path.exists(output_folder):
+    os.mkdir(output_folder)
 # 读取CSV文件
-df = pd.read_csv('../processed_data/all_end_virtuals.csv', header=None,
+df = pd.read_csv(readcsvfile, header=None,
                  names=['river', 'branch', 'chainage'])
 # 遍历每一行，生成对应的.txt文件名
 
@@ -15,7 +20,9 @@ def main():
     for index, row in df.iterrows():
         txt_filename = f"{row['river'].split('_')[0]}_{row['branch']}.txt"
         input_path = os.path.join(input_folder, txt_filename)
+        print('input',input_path)
         output_path = os.path.join(output_folder, txt_filename)
+        print('output',output_path)
         try:
             # 打开并读取对应的.txt文件
             with open(input_path, 'r', encoding='utf-8') as file:

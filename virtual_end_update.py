@@ -1,16 +1,18 @@
 import pandas as pd
 import os
+import sys
 
-# 设置输入和输出文件夹的路径
-input_folder = '../processed_data/txt_virtual_end'
-output_folder = '../processed_data/txt_updated_files'
-
+BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))# 设置输入和输出文件夹的路径
+input_folder = os.path.join(BASE_DIR, 'processed_data', 'txt_virtual_start')
+output_folder = os.path.join(BASE_DIR, 'processed_data', 'txt_virtual_end')
+readcsvfile = os.path.join(BASE_DIR, 'processed_data', 'all_end_virtuals.csv')
 # 确保输出文件夹存在
 os.makedirs(output_folder, exist_ok=True)
 
 # 读取CSV文件，并创建一个映射（文件名到chainage）
-df = pd.read_csv('../processed_data/all_end_virtuals.csv', header=None,
+df = pd.read_csv(readcsvfile, header=None,
                  names=['river', 'branch', 'chainage'])
+
 chainage_map = {f"{row['river'].split('_')[0]}_{row['branch']}.txt": row['chainage']
                 for index, row in df.iterrows()}
 

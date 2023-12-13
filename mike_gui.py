@@ -10,6 +10,9 @@ import chg_insert  # 导入你的 chg_insert 脚本
 import clean_csv  # 导入你的 clean_csv 脚本
 import get_virtual_end  # 导入你的 get_virtual_end 脚本
 import virtual_start
+import mkcc
+import virtual_end
+import virtual_end_update
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
@@ -89,6 +92,15 @@ def run_clean_csv():
     except Exception as e:
         QMessageBox.critical(window, "错误", f"run_clean_csv 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
+def run_mkcc():
+    sys.stdout = EmittingStream(output_area)
+    try:
+        mkcc.main()
+        QMessageBox.information(
+            window, "完成", "根据chainage files in chg_files 插入相关断面信息到对应文件 保存在 inserted_files 文件夹中！")
+    except Exception as e:
+        QMessageBox.critical(window, "错误", f"run_mkcc 脚本执行过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__
 
 def run_get_virtual_end():
     sys.stdout = EmittingStream(output_area)
@@ -99,11 +111,30 @@ def run_get_virtual_end():
     except Exception as e:
         QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
-
 def run_virtual_start():
     sys.stdout = EmittingStream(output_area)
     try:
         virtual_start.main()
+        QMessageBox.information(
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
+    except Exception as e:
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__
+
+def run_virtual_end():
+    sys.stdout = EmittingStream(output_area)
+    try:
+        virtual_end.main()
+        QMessageBox.information(
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
+    except Exception as e:
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__
+
+def run_virtual_end_update():
+    sys.stdout = EmittingStream(output_area)
+    try:
+        virtual_end_update.main()
         QMessageBox.information(
             window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
     except Exception as e:
@@ -145,6 +176,11 @@ clean_csv_button = QPushButton('clean csv')
 clean_csv_button.clicked.connect(run_clean_csv)
 layout.addWidget(clean_csv_button)
 
+mkcc_button = QPushButton('mkcc')
+mkcc_button.clicked.connect(run_mkcc)
+layout.addWidget(mkcc_button)
+
+
 get_virtual_end_button = QPushButton('get virtual end')
 get_virtual_end_button.clicked.connect(run_get_virtual_end)
 layout.addWidget(get_virtual_end_button)
@@ -152,6 +188,15 @@ layout.addWidget(get_virtual_end_button)
 virtual_start_button = QPushButton('virtual start')
 virtual_start_button.clicked.connect(run_virtual_start)
 layout.addWidget(virtual_start_button)
+
+virtual_end_button = QPushButton('virtual end')
+virtual_end_button.clicked.connect(run_virtual_end)
+layout.addWidget(virtual_end_button)
+
+virtual_end_update_button = QPushButton('virtual end update')
+virtual_end_update_button.clicked.connect(run_virtual_end_update)
+layout.addWidget(virtual_end_update_button)
+
 
 window.setLayout(layout)
 window.show()
