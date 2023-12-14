@@ -5,7 +5,6 @@ import xlsx2csv_all, csv_rn_cap, mks2chainage, chg_split, chg_insert, clean_csv,
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
-
 def combine_files():
     if os.path.isfile('./processed_data/combined.txt'):
         os.remove('./processed_data/combined.txt')
@@ -13,7 +12,6 @@ def combine_files():
         for filename in glob.glob('./processed_data/txt_updated_files/*.txt'):
             with open(filename, 'r') as readfile:
                 outfile.write(readfile.read())
-
 
 class EmittingStream:
     def __init__(self, text_widget):
@@ -31,37 +29,31 @@ def run_xlsx_to_csv_script():
     sys.stdout = EmittingStream(output_area)
     try:
         xlsx2csv_all.main()
-        QMessageBox.information(window, "Completed",
-                                "XLSX to CSV conversion completed!")
+        QMessageBox.information(window, "完成", "XLSX 到 CSV 转换完成！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during conversion: {e}")
+        QMessageBox.critical(window, "错误", f"转换过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
 
 def run_csv_rename_script():
-    sys.stdout = EmittingStream(output_area)  # Redirect output to QTextEdit
+    sys.stdout = EmittingStream(output_area)  # 重定向输出到 QTextEdit
     try:
-        csv_rn_cap.main()  # Directly run the main function of the CSV renaming script
-        QMessageBox.information(window, "Completed",
-                                "CSV file renaming completed!")
+        csv_rn_cap.main()  # 直接运行 csv 重命名脚本的 main 函数
+        QMessageBox.information(window, "完成", "CSV 文件重命名完成！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during renaming: {e}")
-    sys.stdout = sys.__stdout__  # Restore standard output
+        QMessageBox.critical(window, "错误", f"重命名过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__  # 恢复标准输出
 
 
 def run_mks2chainage_script():
-    input_file_path = os.path.join(
-        BASE_DIR, 'secss.txt')  # Define input file path
+    input_file_path = os.path.join(BASE_DIR, 'secss.txt')  # 定义输入文件路径
     sys.stdout = EmittingStream(output_area)
     try:
         mks2chainage.main(input_file_path)
         QMessageBox.information(
-            window, "Completed", "MIKE section file conversion to mileage csv completed, saved as chainage.csv!")
+            window, "完成", "MIKE 断面文件转为里程csv文件完成,保存为chainage.csv！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during mks2chainage script execution: {e}")
+        QMessageBox.critical(window, "错误", f"mks2chainage 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
 
@@ -70,10 +62,9 @@ def run_chg_split():
     try:
         chg_split.main()
         QMessageBox.information(
-            window, "Completed", "Section split according to chainage.csv file completed! Saved in chg_files folder!")
+            window, "完成", "根据chainage.csv文件分割断面完成！保存在chg_files文件夹中！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during chg_split script execution: {e}")
+        QMessageBox.critical(window, "错误", f"chg_split 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
 
@@ -82,10 +73,9 @@ def run_chg_insert():
     try:
         chg_insert.main()
         QMessageBox.information(
-            window, "Completed", "Insertion of related section information into corresponding files from chg_files completed! Saved in inserted_files folder!")
+            window, "完成", "根据chainage files in chg_files 插入相关断面信息到对应文件 保存在 inserted_files 文件夹中！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during chg_insert script execution: {e}")
+        QMessageBox.critical(window, "错误", f"chg_split 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
 
@@ -94,83 +84,73 @@ def run_clean_csv():
     try:
         clean_csv.main()
         QMessageBox.information(
-            window, "Completed", "Insertion of related section information into corresponding files from chg_files completed! Saved in inserted_files folder!")
+            window, "完成", "根据chainage files in chg_files 插入相关断面信息到对应文件 保存在 inserted_files 文件夹中！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during clean_csv script execution: {e}")
+        QMessageBox.critical(window, "错误", f"run_clean_csv 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
-
-
 def run_mkcc():
     sys.stdout = EmittingStream(output_area)
     try:
         mkcc.main()
         QMessageBox.information(
-            window, "Completed", "Insertion of related section information into corresponding files from chg_files completed! Saved in inserted_files folder!")
+            window, "完成", "根据chainage files in chg_files 插入相关断面信息到对应文件 保存在 inserted_files 文件夹中！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during mkcc script execution: {e}")
+        QMessageBox.critical(window, "错误", f"run_mkcc 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
-
 
 def run_get_virtual_end():
     sys.stdout = EmittingStream(output_area)
     try:
         get_virtual_end.main()
         QMessageBox.information(
-            window, "Completed", "Extraction of virtual section mileage completed! Saved in processed_data folder!")
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中 ！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during get_virtual_end script execution: {e}")
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
-
-
 def run_virtual_start():
     sys.stdout = EmittingStream(output_area)
     try:
         virtual_start.main()
         QMessageBox.information(
-            window, "Completed", "Extraction of virtual section mileage completed! Saved in processed_data folder!")
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during virtual_start script execution: {e}")
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
-
 
 def run_virtual_end():
     sys.stdout = EmittingStream(output_area)
     try:
         virtual_end.main()
         QMessageBox.information(
-            window, "Completed", "Extraction of virtual section mileage completed! Saved in processed_data folder!")
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during virtual_end script execution: {e}")
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
-
 
 def run_virtual_end_update():
     sys.stdout = EmittingStream(output_area)
     try:
         virtual_end_update.main()
         QMessageBox.information(
-            window, "Completed", "Extraction of virtual section mileage completed! Saved in processed_data folder!")
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during virtual_end_update script execution: {e}")
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
-
 
 def run_combine_files():
     sys.stdout = EmittingStream(output_area)
     try:
         combine_files()
         QMessageBox.information(
-            window, "Completed", "Extraction of virtual section mileage completed! Saved in processed_data folder!")
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
     except Exception as e:
-        QMessageBox.critical(
-            window, "Error", f"Error occurred during combine_files script execution: {e}")
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
+
+def run_data_processing_scripts():
+    run_xlsx_to_csv_script()
+    run_csv_rename_script()
+    run_mks2chainage_script()
 
 
 app = QApplication(sys.argv)
@@ -233,8 +213,5 @@ combine_files_button = QPushButton('combine files')
 combine_files_button.clicked.connect(run_combine_files)
 layout.addWidget(combine_files_button)
 
-window.setLayout(layout)
-window.show()
 
 sys.exit(app.exec_())
-
