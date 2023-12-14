@@ -1,4 +1,5 @@
 import sys
+import glob
 from PyQt5.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QMessageBox, QTextEdit
 from PyQt5.QtGui import QIcon
 import os
@@ -16,6 +17,13 @@ import virtual_end_update
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
+def combine_files():
+    if os.path.isfile('./processed_data/combined.txt'):
+        os.remove('./processed_data/combined.txt')
+    with open('./combined.txt', 'w') as outfile:
+        for filename in glob.glob('./processed_data/txt_updated_files/*.txt'):
+            with open(filename, 'r') as readfile:
+                outfile.write(readfile.read())
 
 class EmittingStream:
     def __init__(self, text_widget):
@@ -141,6 +149,16 @@ def run_virtual_end_update():
         QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
     sys.stdout = sys.__stdout__
 
+def run_combine_files():
+    sys.stdout = EmittingStream(output_area)
+    try:
+        combine_files()
+        QMessageBox.information(
+            window, "完成", "虚拟断面里程提取完成！保存在 processed_data 文件夹中！")
+    except Exception as e:
+        QMessageBox.critical(window, "错误", f"run_get_virtual_end 脚本执行过程中出现错误：{e}")
+    sys.stdout = sys.__stdout__
+
 app = QApplication(sys.argv)
 
 window = QWidget()
@@ -197,6 +215,9 @@ virtual_end_update_button = QPushButton('virtual end update')
 virtual_end_update_button.clicked.connect(run_virtual_end_update)
 layout.addWidget(virtual_end_update_button)
 
+combine_files_button = QPushButton('combine files')
+combine_files_button.clicked.connect(run_combine_files)
+layout.addWidget(combine_files_button)
 
 window.setLayout(layout)
 window.show()
