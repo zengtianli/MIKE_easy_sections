@@ -120,10 +120,58 @@ def run_combine_files():
         "Extraction of virtual section mileage completed! Saved in processed_data folder!",
         "Error occurred during combine_files script execution"
     )
+# Conversion Module Function
+def run_conversion_module():
+    run_xlsx_to_csv_script()
+    run_csv_rename_script()
+
+# Processing Module Function
+def run_processing_module():
+    run_mks2chainage_script()
+    run_chg_split()
+    run_chg_insert()
+    run_clean_csv()
+    run_mkcc()
+
+# Virtual Section Management Module Function
+def run_virtual_section_module():
+    run_get_virtual_end()
+    run_virtual_start()
+    run_virtual_end()
+    run_virtual_end_update()
+    run_combine_files()
+
 
 app = QApplication(sys.argv)
 window = QWidget()
 window.setWindowTitle('MIKE Easy Section Converter')
+
+window.setStyleSheet("""
+    QWidget {
+        background-color: #F2F2F7;  /* Light grey background */
+        color: #000000;  /* Black text */
+    }
+    QPushButton {
+        background-color: #FFFFFF;  /* White button */
+        color: #000000;  /* Black text on button */
+        border: 1px solid #C7C7CC;  /* Subtle border for buttons */
+        border-radius: 8px;  /* Rounded corners for buttons */
+        padding: 6px 15px;  /* Padding around text in buttons */
+        margin: 5px;
+    }
+    QPushButton:hover {
+        background-color: #E5E5EA;  /* Slightly darker background on hover */
+    }
+    QPushButton:pressed {
+        background-color: #D1D1D6;  /* Even darker background when pressed */
+    }
+    QTextEdit {
+        background-color: #FFFFFF;  /* White background for text area */
+        color: #000000;  /* Black text in text area */
+        border: 1px solid #C7C7CC;  /* Subtle border for text area */
+        border-radius: 8px;  /* Rounded corners for text area */
+    }
+""")
 
 # Main layout
 main_layout = QHBoxLayout()
@@ -133,8 +181,10 @@ window.setLayout(main_layout)
 conversion_layout = QVBoxLayout()
 xlsx_to_csv_button = QPushButton('XLSX to CSV')
 csv_rename_button = QPushButton('Rename CSV')
+conversion_module_button=QPushButton('Conversion done')
 conversion_layout.addWidget(xlsx_to_csv_button)
 conversion_layout.addWidget(csv_rename_button)
+conversion_layout.addWidget(conversion_module_button)
 main_layout.addLayout(conversion_layout)
 
 # Processing Module Layout
@@ -144,11 +194,13 @@ chg_split_button = QPushButton('Split Chainage Sections')
 chg_insert_button = QPushButton('Insert Section Data')
 clean_csv_button = QPushButton('Clean CSV Data')
 mkcc_button = QPushButton('Run MKCC')
+processing_module_button=QPushButton('processed data')
 processing_layout.addWidget(mks2chainage_button)
 processing_layout.addWidget(chg_split_button)
 processing_layout.addWidget(chg_insert_button)
 processing_layout.addWidget(clean_csv_button)
 processing_layout.addWidget(mkcc_button)
+processing_layout.addWidget(processing_module_button)
 main_layout.addLayout(processing_layout)
 
 # Virtual Section Management Module Layout
@@ -158,11 +210,13 @@ virtual_start_button = QPushButton('Set Virtual Start')
 virtual_end_button = QPushButton('Set Virtual End')
 virtual_end_update_button = QPushButton('Update Virtual End')
 combine_files_button = QPushButton('Combine Files')
+virtual_section_module_button=QPushButton('virtual section')
 virtual_section_layout.addWidget(get_virtual_end_button)
 virtual_section_layout.addWidget(virtual_start_button)
 virtual_section_layout.addWidget(virtual_end_button)
 virtual_section_layout.addWidget(virtual_end_update_button)
 virtual_section_layout.addWidget(combine_files_button)
+virtual_section_layout.addWidget(virtual_section_module_button)
 main_layout.addLayout(virtual_section_layout)
 
 # Output Area
@@ -173,16 +227,21 @@ main_layout.addWidget(output_area)
 # Connect buttons to their respective functions
 xlsx_to_csv_button.clicked.connect(run_xlsx_to_csv_script)
 csv_rename_button.clicked.connect(run_csv_rename_script)
+conversion_module_button.clicked.connect(run_conversion_module)
+
 mks2chainage_button.clicked.connect(run_mks2chainage_script)
 chg_split_button.clicked.connect(run_chg_split)
 chg_insert_button.clicked.connect(run_chg_insert)
 clean_csv_button.clicked.connect(run_clean_csv)
 mkcc_button.clicked.connect(run_mkcc)
+processing_module_button.clicked.connect(run_processing_module)
+
 get_virtual_end_button.clicked.connect(run_get_virtual_end)
 virtual_start_button.clicked.connect(run_virtual_start)
 virtual_end_button.clicked.connect(run_virtual_end)
 virtual_end_update_button.clicked.connect(run_virtual_end_update)
 combine_files_button.clicked.connect(run_combine_files)
+virtual_section_module_button.clicked.connect(run_virtual_section_module)
 
 window.show()
 sys.exit(app.exec_())
