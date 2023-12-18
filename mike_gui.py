@@ -1,10 +1,7 @@
 import sys, os, glob
 from PyQt5.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QMessageBox, QTextEdit, QHBoxLayout
-
 import xlsx2csv_all, csv_rn_cap, mks2chainage, chg_split, chg_insert, clean_csv, get_virtual_end, virtual_start, mkcc, virtual_end, virtual_end_update
 
-# Import your scripts here
-import xlsx2csv_all, csv_rn_cap, mks2chainage, chg_split, chg_insert, clean_csv, get_virtual_end, virtual_start, mkcc, virtual_end, virtual_end_update
 
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 def combine_files():
@@ -38,10 +35,10 @@ def run_xlsx_to_csv_script():
     xlsx2csv_all.BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
     execute_script(
         xlsx2csv_all.main,
-        "XLSX to CSV conversion completed!",
+        "XLSX to <u>CSV</u> conversion completed!",
         "Error occurred during conversion"
     )
-
+'world'
 def run_csv_rename_script():
     execute_script(
         csv_rn_cap.main,
@@ -53,7 +50,7 @@ def run_mks2chainage_script():
     input_file_path = os.path.join(BASE_DIR, 'secss.txt')
     execute_script(
         mks2chainage.main,
-        "MIKE section file conversion to mileage csv completed, saved as chainage.csv!",
+        "according to MIKE section file(txt) generate a mileage csv completed, saved as <u>chainage.csv</u> (need modify manually)!",
         "Error occurred during mks2chainage script execution",
         input_file_path
     )
@@ -61,63 +58,63 @@ def run_mks2chainage_script():
 def run_chg_split():
     execute_script(
         chg_split.main,
-        "Section split according to chainage.csv file completed! Saved in chg_files folder!",
+        "Section split according to chainage.csv file completed! Saved in <u>chg_files</u> folder!",
         "Error occurred during chg_split script execution"
     )
 
 def run_chg_insert():
     execute_script(
         chg_insert.main,
-        "Insertion of related section information into corresponding files from chg_files completed! Saved in inserted_files folder!",
+        "Insertion of related section information from chg_files into corresponding files ! Saved in <u>inserted_files</u> folder!",
         "Error occurred during chg_insert script execution"
     )
 
 def run_clean_csv():
     execute_script(
         clean_csv.main,
-        "Insertion of related section information into corresponding files from chg_files completed! Saved in inserted_files folder!",
+        "clean csv data completed! Saved in <u>cleaned_files</u> folder!",
         "Error occurred during clean_csv script execution"
     )
 
 def run_mkcc():
     execute_script(
         mkcc.main,
-        "Insertion of related section information into corresponding files from chg_files completed! Saved in inserted_files folder!",
+        "according to csv files generate MIKE section file(txt) completed! Saved in <u>txt_files</u> folder!",
         "Error occurred during mkcc script execution"
     )
 
 def run_get_virtual_end():
     execute_script(
         get_virtual_end.main,
-        "Extraction of virtual section mileage completed! Saved in processed_data folder!",
+        "Extract virtual section from chg_files and combine them into <u>all_virtual_end.csv </u>",
         "Error occurred during get_virtual_end script execution"
     )
 
 def run_virtual_start():
     execute_script(
         virtual_start.main,
-        "Extraction of virtual section mileage completed! Saved in processed_data folder!",
+        "add start virtual section to txt files, save in  <u>txt_virtual_start</u> folder! ",
         "Error occurred during virtual_start script execution"
     )
 
 def run_virtual_end():
     execute_script(
         virtual_end.main,
-        "Extraction of virtual section mileage completed! Saved in processed_data folder!",
+        "add end virtual section to txt files, save in  <u>txt_virtual_end</u> folder!",
         "Error occurred during virtual_end script execution"
     )
 
 def run_virtual_end_update():
     execute_script(
         virtual_end_update.main,
-        "Extraction of virtual section mileage completed! Saved in processed_data folder!",
+        "update end virtual section to txt files, save in  <u>txt_virtual_end</u> folder!",
         "Error occurred during virtual_end_update script execution"
     )
 
 def run_combine_files():
     execute_script(
         combine_files,
-        "Extraction of virtual section mileage completed! Saved in processed_data folder!",
+        "Combine all txt files into <u>combined.txt</u> file!",
         "Error occurred during combine_files script execution"
     )
 # Conversion Module Function
@@ -173,7 +170,8 @@ window.setStyleSheet("""
     }
 """)
 
-# Main layout
+
+# Main horizontal layout
 main_layout = QHBoxLayout()
 window.setLayout(main_layout)
 
@@ -181,11 +179,8 @@ window.setLayout(main_layout)
 conversion_layout = QVBoxLayout()
 xlsx_to_csv_button = QPushButton('XLSX to CSV')
 csv_rename_button = QPushButton('Rename CSV')
-conversion_module_button=QPushButton('Conversion done')
 conversion_layout.addWidget(xlsx_to_csv_button)
 conversion_layout.addWidget(csv_rename_button)
-conversion_layout.addWidget(conversion_module_button)
-main_layout.addLayout(conversion_layout)
 
 # Processing Module Layout
 processing_layout = QVBoxLayout()
@@ -194,14 +189,11 @@ chg_split_button = QPushButton('Split Chainage Sections')
 chg_insert_button = QPushButton('Insert Section Data')
 clean_csv_button = QPushButton('Clean CSV Data')
 mkcc_button = QPushButton('Run MKCC')
-processing_module_button=QPushButton('processed data')
 processing_layout.addWidget(mks2chainage_button)
 processing_layout.addWidget(chg_split_button)
 processing_layout.addWidget(chg_insert_button)
 processing_layout.addWidget(clean_csv_button)
 processing_layout.addWidget(mkcc_button)
-processing_layout.addWidget(processing_module_button)
-main_layout.addLayout(processing_layout)
 
 # Virtual Section Management Module Layout
 virtual_section_layout = QVBoxLayout()
@@ -210,13 +202,30 @@ virtual_start_button = QPushButton('Set Virtual Start')
 virtual_end_button = QPushButton('Set Virtual End')
 virtual_end_update_button = QPushButton('Update Virtual End')
 combine_files_button = QPushButton('Combine Files')
-virtual_section_module_button=QPushButton('virtual section')
 virtual_section_layout.addWidget(get_virtual_end_button)
 virtual_section_layout.addWidget(virtual_start_button)
 virtual_section_layout.addWidget(virtual_end_button)
 virtual_section_layout.addWidget(virtual_end_update_button)
 virtual_section_layout.addWidget(combine_files_button)
+
+# Add stretch to push the module buttons down
+conversion_layout.addStretch()
+processing_layout.addStretch()
+virtual_section_layout.addStretch()
+
+# Module buttons
+conversion_module_button = QPushButton('Conversion Module')
+processing_module_button = QPushButton('processed_data Module')
+virtual_section_module_button = QPushButton('virtual_section Module')
+
+# Add module buttons to the layouts
+conversion_layout.addWidget(conversion_module_button)
+processing_layout.addWidget(processing_module_button)
 virtual_section_layout.addWidget(virtual_section_module_button)
+
+# Add layouts to the main layout
+main_layout.addLayout(conversion_layout)
+main_layout.addLayout(processing_layout)
 main_layout.addLayout(virtual_section_layout)
 
 # Output Area
