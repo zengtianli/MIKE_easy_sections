@@ -1,0 +1,24 @@
+QWidget {
+    background-color: #F7FFF7;  /* Very light green background */
+    color: #1A535C;  /* Deep green text */
+}
+QPushButton {
+    background-color: #4ECDC4;  /* Vibrant green */
+    color: #FFFFFF;  /* White text */
+    border: 1px solid #56B3B4;  /* Slightly darker green border */
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton:hover {
+    background-color: #68D8D6;  /* Lighter green on hover */
+}
+QPushButton:pressed {
+    background-color: #3EB1B2;  /* Darker green when pressed */
+}
+QTextEdit {
+    background-color: #E0FFF8;  /* Very light green, almost white */
+    color: #1A535C;
+    border: 1px solid #56B3B4;
+    border-radius: 6px;
+}

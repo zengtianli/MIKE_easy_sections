@@ -1,0 +1,24 @@
+QWidget {
+    background-color: #EDF1F5;  /* Soft blue background */
+    color: #1C2833;  /* Dark text for contrast */
+}
+QPushButton {
+    background-color: #AED6F1;  /* Light blue */
+    color: #154360;  /* Dark blue text */
+    border: 1px solid #5499C7;  /* Medium blue border */
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton:hover {
+    background-color: #85C1E9;  /* Slightly darker on hover */
+}
+QPushButton:pressed {
+    background-color: #5DADE2;  /* Even darker when pressed */
+}
+QTextEdit {
+    background-color: #D6EAF8;  /* Very light blue text area */
+    color: #1C2833;
+    border: 1px solid #5499C7;
+    border-radius: 6px;
+}

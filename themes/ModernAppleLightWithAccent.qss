@@ -1,0 +1,21 @@
+    QWidget {
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+    QPushButton {
+        background-color: #F0F0F0;  /* Very light grey */
+        color: #007AFF;  /* Apple's accent blue */
+        border: 1px solid #D0D0D0;
+        border-radius: 6px;
+        padding: 6px 12px;
+        margin: 6px;
+    }
+    QPushButton:hover {
+        background-color: #E5E5E5;
+    }
+    QTextEdit {
+        background-color: #F0F0F0;  /* Slightly grey text area */
+        color: #000000;
+        border: 1px solid #D0D0D0;
+        border-radius: 6px;
+    }
