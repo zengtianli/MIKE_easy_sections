@@ -141,13 +141,28 @@ def setup_layout(layout_type):
 def set_horizontal_layout(): setup_layout('horizontal')
 def set_vertical_layout(): setup_layout('vertical')
 setup_layout('vertical')
+
 menu_bar = window.menuBar()
 layout_menu = menu_bar.addMenu('Layout')
+theme_menu = menu_bar.addMenu('Themes')
+
 horizontal_layout_action = layout_menu.addAction('Horizontal Layout')
 vertical_layout_action = layout_menu.addAction('Vertical Layout')
 horizontal_layout_action.triggered.connect(set_horizontal_layout)
 vertical_layout_action.triggered.connect(set_vertical_layout)
-theme_menu = menu_bar.addMenu('Themes')
+
+from PyQt6.QtGui import QKeySequence
+
+# ...
+
+horizontal_layout_action = layout_menu.addAction('Horizontal Layout')
+horizontal_layout_action.setShortcut(QKeySequence('Ctrl+Alt+C')) 
+horizontal_layout_action.triggered.connect(set_horizontal_layout)
+
+vertical_layout_action = layout_menu.addAction('Vertical Layout')
+vertical_layout_action.setShortcut(QKeySequence('Ctrl+Alt+V'))  
+vertical_layout_action.triggered.connect(set_vertical_layout)
+
 Theme_modern_apple_light_action = theme_menu.addAction('Modern Apple Light')
 Theme_apple_dark_light_hybrid_action = theme_menu.addAction('Apple Dark Light Hybrid')
 Theme_classic_apple_light_action = theme_menu.addAction('Classic Apple Light')
