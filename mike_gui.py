@@ -2,6 +2,7 @@ import sys, os, glob,layout_v,layout_h
 from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QMessageBox, QTextEdit, QHBoxLayout, QMenuBar, QMainWindow
 import xlsx2csv_all, csv_rn_cap, mks2chainage, chg_split, chg_insert, clean_csv, get_virtual_end, virtual_start, mkcc, virtual_end, virtual_end_update
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
+
 def combine_files():
     if os.path.isfile('./processed_data/combined.txt'):
         os.remove('./processed_data/combined.txt')
@@ -16,22 +17,8 @@ class EmittingStream:
         self.text_widget.append(message)
     def flush(self):
         pass
-def set_theme(theme_file):
-    theme_folder = os.path.join(BASE_DIR, 'themes')
-    theme_path = os.path.join(theme_folder, theme_file)
-    with open(theme_path, 'r') as f:
-        style_sheet = f.read()
-    window.setStyleSheet(style_sheet)
-def set_modern_apple_light_theme(): set_theme('ModernAppleLightWithAccent.qss')
-def set_apple_dark_light_hybrid_theme(): set_theme('AppleDarkLightHybrid.qss')
-def set_classic_apple_light_theme(): set_theme('ClassicAppleLight.qss')
-def set_elegant_dark_theme(): set_theme('ElegantDarkTheme.qss')
-def set_soft_blue_theme(): set_theme('SoftBlueTheme.qss')
-def set_minimalist_green_theme(): set_theme('MinimalistGreenTheme.qss')
-def set_warm_sunset_theme(): set_theme('WarmSunsetTheme.qss')
-def set_retrowave_theme(): set_theme('RetroWaveTheme.qss')
-def set_nature_inspired_theme(): set_theme('NatureInspiredTheme.qss')
-def set_tech_professional_theme(): set_theme('TechProfessionalTheme.qss')
+
+
 def execute_script(script_func, success_message, error_message, *args):
     sys.stdout = EmittingStream(output_area)
     try:
@@ -163,26 +150,9 @@ vertical_layout_action = layout_menu.addAction('Vertical Layout')
 vertical_layout_action.setShortcut(QKeySequence('Ctrl+Alt+V'))  
 vertical_layout_action.triggered.connect(set_vertical_layout)
 
-Theme_modern_apple_light_action = theme_menu.addAction('Modern Apple Light')
-Theme_apple_dark_light_hybrid_action = theme_menu.addAction('Apple Dark Light Hybrid')
-Theme_classic_apple_light_action = theme_menu.addAction('Classic Apple Light')
-Theme_elegant_dark_action = theme_menu.addAction('Elegant Dark')
-Theme_soft_blue_action = theme_menu.addAction('Soft Blue')
-Theme_minimalist_green_action = theme_menu.addAction('Minimalist Green')
-Theme_warm_sunset_action = theme_menu.addAction('Warm Sunset')
-Theme_retrowave_action = theme_menu.addAction('Retro Wave')
-Theme_nature_inspired_action = theme_menu.addAction('Nature Inspired')
-Theme_tech_professional_action = theme_menu.addAction('Tech Professional')
-Theme_modern_apple_light_action.triggered.connect(set_modern_apple_light_theme)
-Theme_apple_dark_light_hybrid_action.triggered.connect(set_apple_dark_light_hybrid_theme)
-Theme_classic_apple_light_action.triggered.connect(set_classic_apple_light_theme)
-Theme_elegant_dark_action.triggered.connect(set_elegant_dark_theme)
-Theme_soft_blue_action.triggered.connect(set_soft_blue_theme)
-Theme_minimalist_green_action.triggered.connect(set_minimalist_green_theme)
-Theme_warm_sunset_action.triggered.connect(set_warm_sunset_theme)
-Theme_retrowave_action.triggered.connect(set_retrowave_theme)
-Theme_nature_inspired_action.triggered.connect(set_nature_inspired_theme)
-Theme_tech_professional_action.triggered.connect(set_tech_professional_theme)
-set_modern_apple_light_theme()
+
+import theme_manager
+theme_manager.create_theme_actions(window, theme_menu)
+theme_manager.set_default_theme(window)
 window.show()
 sys.exit(app.exec())
