@@ -57,7 +57,3 @@ def create_virtual_section_layout(get_virtual_end_func, virtual_start_func, virt
     virtual_section_layout.addStretch()
     virtual_section_layout.addWidget(virtual_section_module_button)
     return virtual_section_layout
-def create_output_area():
-    output_area = QTextEdit()
-    output_area.setReadOnly(True)
-    return output_area

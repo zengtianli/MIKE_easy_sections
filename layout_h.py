@@ -1,6 +1,5 @@
 # layout_h.py
 from PyQt6.QtWidgets import QPushButton, QHBoxLayout, QVBoxLayout, QWidget, QSizePolicy, QSpacerItem, QTextEdit
-
 def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_module_func):
     conversion_layout = QHBoxLayout()
     con_xlsx_to_csv_button = QPushButton('XLSX to CSV')
@@ -17,7 +16,6 @@ def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_modul
     conversion_layout.addSpacerItem(QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum))
     conversion_layout.addWidget(conversion_module_button)
     return conversion_layout
-
 def create_processing_layout(mks2chainage_func, chg_split_func, chg_insert_func, clean_csv_func, mkcc_func, processing_module_func):
     processing_layout = QHBoxLayout()
     pro_mks2chainage_button = QPushButton('MKS2Chainage')
@@ -74,7 +72,3 @@ def create_virtual_section_layout(get_virtual_end_func, virtual_start_func, virt
     virtual_section_layout.addSpacerItem(QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum))
     virtual_section_layout.addWidget(virtual_section_module_button)
     return virtual_section_layout
-def create_output_area():
-    output_area = QTextEdit()
-    output_area.setReadOnly(True)
-    return output_area
