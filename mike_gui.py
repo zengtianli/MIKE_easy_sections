@@ -1,8 +1,6 @@
-# mike_gui.py
-import sys, os, glob,layout_v,layout_h
-from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QMessageBox, QTextEdit, QHBoxLayout, QMenuBar, QMainWindow
-import xlsx2csv_all, csv_rn_cap, mks2chainage, chg_split, chg_insert, clean_csv, get_virtual_end, virtual_start, mkcc, virtual_end, virtual_end_update
-from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QLineEdit, QPushButton, QKeySequenceEdit
+import sys,os,glob
+from scripts import xlsx2csv_all, csv_rn_cap, mks2chainage, chg_split, chg_insert, clean_csv, get_virtual_end, virtual_start, mkcc, virtual_end, virtual_end_update
+from PyQt6.QtWidgets import (QApplication, QPushButton, QVBoxLayout, QWidget, QMessageBox, QTextEdit, QHBoxLayout, QMenuBar, QMainWindow, QDialog, QLabel, QLineEdit, QKeySequenceEdit)
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 def combine_files():
     if os.path.isfile('./processed_data/combined.txt'):
@@ -11,15 +9,6 @@ def combine_files():
         for filename in glob.glob('./processed_data/txt_virtual_end/*.txt'):
             with open(filename, 'r') as readfile:
                 outfile.write(readfile.read())
-class EmittingStream:
-    def __init__(self, text_widget):
-        self.text_widget = text_widget
-    def write(self, message):
-        self.text_widget.append(message)
-    def flush(self):
-        pass
-
-
 class ShortcutDialog(QDialog):
     def __init__(self, action, parent=None):
         super().__init__(parent)
@@ -39,7 +28,6 @@ class ShortcutDialog(QDialog):
 def show_shortcut_dialog(action):
     dialog = ShortcutDialog(action, window)
     dialog.exec()
-
 def execute_script(script_func, success_message, error_message, *args):
     sys.stdout = EmittingStream(output_area)
     try:
@@ -52,6 +40,13 @@ def execute_script(script_func, success_message, error_message, *args):
         QMessageBox.critical(window, "Error", f"{error_message}: {e}")
     finally:
         sys.stdout = sys.__stdout__
+class EmittingStream:
+    def __init__(self, text_widget):
+        self.text_widget = text_widget
+    def write(self, message):
+        self.text_widget.append(message)
+    def flush(self):
+        pass
 def run_xlsx_to_csv_script(): xlsx2csv_all.BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0])); execute_script( xlsx2csv_all.main, "XLSX to <u>CSV</u> conversion completed!", "Error occurred during conversion")
 def run_csv_rename_script(): execute_script( csv_rn_cap.main, "CSV file renaming completed!", "Error occurred during renaming")
 def run_mks2chainage_script(): input_file_path = os.path.join(BASE_DIR, 'secss.txt'); execute_script( mks2chainage.main, "according to MIKE section file(txt) generate a mileage csv completed, saved as <u>chainage.csv</u> (need modify manually)!", "Error occurred during mks2chainage script execution", input_file_path)
@@ -68,8 +63,6 @@ def run_conversion_module(): run_xlsx_to_csv_script(); run_csv_rename_script()
 def run_processing_module(): run_mks2chainage_script(); run_chg_split(); run_chg_insert(); run_clean_csv(); run_mkcc()
 def run_virtual_section_module(): run_get_virtual_end(); run_virtual_start(); run_virtual_end(); run_virtual_end_update(); run_combine_files()
 
-
-from PyQt6 import sip
 app = QApplication(sys.argv)
 window = QMainWindow()
 window.setWindowTitle('MIKE Easy Section Converter')
@@ -80,24 +73,11 @@ output_area.setReadOnly(True)
 menu_bar = window.menuBar()
 layout_menu = menu_bar.addMenu('Layout')
 import layout_manager
-
-
 def set_horizontal_layout(central_widget, output_area): layout_manager.setup_layout('horizontal', central_widget, output_area)
 def set_vertical_layout(central_widget, output_area): layout_manager.setup_layout('vertical', central_widget, output_area)
-# layout_manager.setup_layout('vertical', central_widget, output_area)
-# setup_layout('vertical', central_widget, output_area)
-# ... rest of your code ...
-# Example call to setup_layout
 layout_manager.setup_layout('vertical', central_widget, output_area, run_xlsx_to_csv_script, run_csv_rename_script, run_conversion_module, 
              run_mks2chainage_script, run_chg_split, run_chg_insert, run_clean_csv, run_mkcc, run_processing_module, 
              run_get_virtual_end, run_virtual_start, run_virtual_end, run_virtual_end_update, run_combine_files, run_virtual_section_module)
-# mike_gui.py
-# ... [rest of your code]
-
-# Now these functions are accessed through layout_manager
-
-# ... rest of your code ...
-
 from PyQt6.QtGui import QKeySequence
 horizontal_layout_action = layout_menu.addAction('Horizontal Layout')
 horizontal_layout_action.setShortcut(QKeySequence('Ctrl+Alt+C')) 
@@ -119,10 +99,8 @@ vertical_layout_action.triggered.connect(
         run_get_virtual_end, run_virtual_start, run_virtual_end, run_virtual_end_update, run_combine_files, run_virtual_section_module
     )
 )
-
 # horizontal_layout_action.triggered.connect(lambda: set_horizontal_layout(central_widget, output_area))
 # vertical_layout_action.triggered.connect(lambda: set_vertical_layout(central_widget, output_area))
-
 theme_menu = menu_bar.addMenu('Themes')
 import theme_manager
 theme_manager.create_theme_actions(window, theme_menu)
