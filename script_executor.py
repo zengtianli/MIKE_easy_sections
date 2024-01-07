@@ -79,21 +79,33 @@ def R_combine_txt(window, output_area):
 
 
 def R_conv_module(window, output_area):
-    R_xlsx2csv(window, output_area)
-    R_rename_csv(window, output_area)
+    try:
+        R_xlsx2csv(window, output_area)
+        R_rename_csv(window, output_area)
+    except Exception as e:
+        print(f"Error in conversion module: {e}")
+        return  # Stop execution if an error occurs
 
 
 def R_proc_module(window, output_area):
-    # R_mks2chain(window, output_area)
-    R_split_chg(window, output_area)
-    R_insert_chg(window, output_area)
-    R_clean_csv(window, output_area)
-    R_mkcc(window, output_area)
+    try:
+        # R_mks2chain(window, output_area)  # Uncomment if needed
+        R_split_chg(window, output_area)
+        R_insert_chg(window, output_area)
+        R_clean_csv(window, output_area)
+        R_mkcc(window, output_area)
+    except Exception as e:
+        print(f"Error in processing module: {e}")
+        return  # Stop execution if an error occurs
 
 
 def R_virt_sect_mod(window, output_area):
-    R_get_virt_end(window, output_area)
-    R_virt_start(window, output_area)
-    R_virt_end(window, output_area)
-    R_upd_virt_end(window, output_area)
-    R_combine_txt(window, output_area)
+    try:
+        R_get_virt_end(window, output_area)
+        R_virt_start(window, output_area)
+        R_virt_end(window, output_area)
+        R_upd_virt_end(window, output_area)
+        R_combine_txt(window, output_area)
+    except Exception as e:
+        print(f"Error in virtual section module: {e}")
+        return  # Stop execution if an error occurs
