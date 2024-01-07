@@ -1,9 +1,6 @@
 # mike_gui.py
 from PyQt6.QtGui import QKeySequence
 import sys
-import os
-import glob
-from scripts import xlsx2csv_all, csv_rn_cap, mks2chainage, chg_split, chg_insert, clean_csv, get_virtual_end, virtual_start, mkcc, virtual_end, virtual_end_update
 from PyQt6.QtWidgets import (QApplication, QPushButton, QVBoxLayout, QWidget, QMessageBox,
                              QTextEdit, QHBoxLayout, QMenuBar, QMainWindow, QDialog, QLabel, QLineEdit, QKeySequenceEdit)
 from script_executor import (R_xlsx2csv, R_rename_csv, R_mks2chain, R_split_chg,
@@ -42,9 +39,9 @@ layout_manager.setup_layout(
     lambda: R_virt_sect_mod(window, output_area)
 )
 horizontal_layout_action = layout_menu.addAction('Horizontal Layout')
-horizontal_layout_action.setShortcut(QKeySequence('Ctrl+Alt+C'))
+horizontal_layout_action.setShortcut(QKeySequence('Ctrl+Alt+K'))
 vertical_layout_action = layout_menu.addAction('Vertical Layout')
-vertical_layout_action.setShortcut(QKeySequence('Ctrl+Alt+V'))
+vertical_layout_action.setShortcut(QKeySequence('Ctrl+Alt+J'))
 theme_menu = menu_bar.addMenu('Themes')
 horizontal_layout_action.triggered.connect(
     lambda: layout_manager.set_horizontal_layout(

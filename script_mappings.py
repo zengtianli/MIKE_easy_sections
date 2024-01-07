@@ -17,65 +17,64 @@ def combine_files():
 
 
 script_mappings = {
-    "xlsx_to_csv": {
+    "xlsxToCsv": {
         "func": xlsx2csv_all.main,
         "success_msg": "XLSX to <u>CSV</u> conversion completed!",
         "error_msg": "Error occurred during conversion"
     },
-    "csv_rename": {
+    "renameCsv": {
         "func": csv_rn_cap.main,
         "success_msg": "CSV file renaming completed!",
         "error_msg": "Error occurred during renaming"
     },
-    # Add other script mappings here
-    "mks2chainage": {
+    "mkChainCsv": {
         "func": mks2chainage.main,
-        "success_msg": "according to MIKE section file(txt) generate a mileage csv completed, saved as <u>chainage.csv</u> (need modify manually)!",
-        "error_msg": "Error occurred during mks2chainage script execution"
+        "success_msg": "Mileage CSV generation completed, saved as <u>chainage.csv</u>!",
+        "error_msg": "Error occurred during mileage CSV generation"
     },
-    "chg_split": {
+    "splitChg": {
         "func": chg_split.main,
-        "success_msg": "Section split according to chainage.csv file completed! Saved in <u>chg_files</u> folder!",
-        "error_msg": "Error occurred during chg_split script execution"
+        "success_msg": "Section split by chainage completed! Saved in <u>chg_files</u> folder!",
+        "error_msg": "Error occurred during section split"
     },
-    "chg_insert": {
+    "insertChg": {
         "func": chg_insert.main,
-        "success_msg": "Insertion of related section information from chg_files into corresponding files ! Saved in <u>inserted_files</u> folder!",
-        "error_msg": "Error occurred during chg_insert script execution"
+        "success_msg": "Section info insertion from chg_files completed! Saved in <u>inserted_files</u> folder!",
+        "error_msg": "Error occurred during section info insertion"
     },
-    "clean_csv": {
+    "cleanCsv": {
         "func": clean_csv.main,
-        "success_msg": "clean csv data completed! Saved in <u>cleaned_files</u> folder!",
-        "error_msg": "Error occurred during clean_csv script execution"
+        "success_msg": "CSV data cleaned! Saved in <u>cleaned_files</u> folder!",
+        "error_msg": "Error occurred during CSV cleaning"
     },
-    "mkcc": {
+    "mkMikeTxt": {
         "func": mkcc.main,
-        "success_msg": "according to csv files generate MIKE section file(txt) completed! Saved in <u>txt_files</u> folder!",
-        "error_msg": "Error occurred during mkcc script execution"
+        "success_msg": "MIKE section file generation from CSV completed! Saved in <u>txt_files</u> folder!",
+        "error_msg": "Error occurred during MIKE section file generation"
     },
-    "get_virtual_end": {
+    "getVirtEnd": {
         "func": get_virtual_end.main,
-        "success_msg": "Extract virtual section from chg_files and combine them into <u>all_virtual_end.csv </u>",
-        "error_msg": "Error occurred during get_virtual_end script execution"
+        "success_msg": "Virtual section extraction and combination completed!",
+        "error_msg": "Error occurred during virtual section processing"
     },
-    "virtual_start": {
+    "virtStart": {
         "func": virtual_start.main,
-        "success_msg": "add start virtual section to txt files, save in  <u>txt_virtual_start</u> folder! ",
-        "error_msg": "Error occurred during virtual_start script execution"
+        "success_msg": "Start virtual section added to txt files! Saved in <u>txt_virtual_start</u> folder!",
+        "error_msg": "Error occurred during start virtual section addition"
     },
-    "virtual_end": {
+    "virtEnd": {
         "func": virtual_end.main,
-        "success_msg": "add end virtual section to txt files, save in  <u>txt_virtual_end</u> folder!",
-        "error_msg": "Error occurred during virtual_end script execution"
+        "success_msg": "End virtual section added to txt files! Saved in <u>txt_virtual_end</u> folder!",
+        "error_msg": "Error occurred during end virtual section addition"
     },
-    "virtual_end_update": {
+    "updateVirtEnd": {
         "func": virtual_end_update.main,
-        "success_msg": "update end virtual section to txt files, save in  <u>txt_virtual_end</u> folder!",
-        "error_msg": "Error occurred during virtual_end_update script execution"
+        "success_msg": "End virtual section updated in txt files! Saved in <u>txt_virtual_end</u> folder!",
+        "error_msg": "Error occurred during end virtual section update"
     },
-    "combine_files": {
+    "combineTxt": {
         "func": combine_files,
-        "success_msg": "Combine all txt files into <u>combined.txt</u> file!",
-        "error_msg": "Error occurred during combine_files script execution"
+        "success_msg": "All txt files combined into <u>combined.txt</u>!",
+        "error_msg": "Error occurred during txt file combination"
     }
 }

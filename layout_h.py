@@ -2,8 +2,8 @@
 from PyQt6.QtWidgets import QPushButton, QHBoxLayout, QVBoxLayout, QWidget, QSizePolicy, QSpacerItem, QTextEdit
 def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_module_func):
     conversion_layout = QHBoxLayout()
-    con_xlsx_to_csv_button = QPushButton('XLSX to CSV')
-    con_csv_rename_button = QPushButton('Rename CSV')
+    con_xlsx_to_csv_button = QPushButton('xlsxToCsv')
+    con_csv_rename_button = QPushButton('renameCsv')
     conversion_module_button = QPushButton('Conversion Module')
     con_xlsx_to_csv_button.setFixedSize(180, 40)
     con_csv_rename_button.setFixedSize(180, 40)
@@ -18,11 +18,11 @@ def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_modul
     return conversion_layout
 def create_processing_layout(mks2chainage_func, chg_split_func, chg_insert_func, clean_csv_func, mkcc_func, processing_module_func):
     processing_layout = QHBoxLayout()
-    pro_mks2chainage_button = QPushButton('MKS2Chainage')
-    pro_chg_split_button = QPushButton('CHG Split')
-    pro_chg_insert_button = QPushButton('CHG Insert')
-    pro_clean_csv_button = QPushButton('Clean CSV')
-    pro_mkcc_button = QPushButton('MKCC')
+    pro_mks2chainage_button = QPushButton('mkChainCsv')
+    pro_chg_split_button = QPushButton('splitChg')
+    pro_chg_insert_button = QPushButton('insertChg')
+    pro_clean_csv_button = QPushButton('cleanCsv')
+    pro_mkcc_button = QPushButton('mkMikeTxt')
     processing_module_button = QPushButton('Processing Module')
     pro_mks2chainage_button.setFixedSize(180, 40)
     pro_chg_split_button.setFixedSize(180, 40)
@@ -46,11 +46,11 @@ def create_processing_layout(mks2chainage_func, chg_split_func, chg_insert_func,
     return processing_layout
 def create_virtual_section_layout(get_virtual_end_func, virtual_start_func, virtual_end_func, virtual_end_update_func, combine_files_func, virtual_section_module_func):
     virtual_section_layout = QHBoxLayout()
-    virtual_get_end_button = QPushButton('Get Virtual End')
-    virtual_start_button = QPushButton('Virtual Start')
-    virtual_end_button = QPushButton('Virtual End')
-    virtual_end_update_button = QPushButton('Virtual End Update')
-    vir_combine_files_button = QPushButton('Combine Files')
+    virtual_get_end_button = QPushButton('getVirtEnd')
+    virtual_start_button = QPushButton('virtStart')
+    virtual_end_button = QPushButton('virtEnd')
+    virtual_end_update_button = QPushButton('virtEndUpdate')
+    vir_combine_files_button = QPushButton('combineTxt')
     virtual_section_module_button = QPushButton('Virtual Section Module')
     virtual_get_end_button.setFixedSize(180, 40)
     virtual_start_button.setFixedSize(180, 40)
