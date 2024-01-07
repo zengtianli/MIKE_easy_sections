@@ -1,4 +1,4 @@
-QWidget {
+/*ElegantDarkTheme.qss*/QWidget {
     background-color: #34495E;  /* Dark blue-grey background */
     color: #ECF0F1;  /* Light grey text */
 }
@@ -22,3 +22,15 @@ QTextEdit {
     border: 1px solid #7F8C8D;
     border-radius: 4px;
 }
+QPushButton#specialButton {
+    background-color: #16A085; /* Sea Green */
+    color: #ECF0F1; /* Light grey text */
+    border: 1px solid #7F8C8D;
+    border-radius: 4px;
+    padding: 7px 14px;
+    margin: 4px;
+}
+QPushButton#specialButton:hover {
+    background-color: #1ABC9C; /* Lighter shade of Sea Green */
+}
+

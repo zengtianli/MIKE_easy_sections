@@ -1,4 +1,4 @@
-    QWidget {
+/*ModernAppleLightWithAccent.qss*/    QWidget {
         background-color: #FFFFFF;
         color: #000000;
     }
@@ -19,3 +19,15 @@
         border: 1px solid #D0D0D0;
         border-radius: 6px;
     }
+QPushButton#specialButton {
+    background-color: #008080; /* Teal */
+    color: #FFFFFF; /* White text */
+    border: 1px solid #D0D0D0;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 6px;
+}
+QPushButton#specialButton:hover {
+    background-color: #20B2AA; /* Lighter shade of Teal */
+}
+

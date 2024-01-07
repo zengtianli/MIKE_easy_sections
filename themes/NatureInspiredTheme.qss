@@ -1,4 +1,4 @@
-QWidget {
+/*NatureInspiredTheme.qss*/QWidget {
     background-color: #EAE7DC;  /* Light beige background */
     color: #3D405B;  /* Dark blue text */
 }
@@ -22,3 +22,15 @@ QTextEdit {
     border: 1px solid #9FB7B9;
     border-radius: 6px;
 }
+QPushButton#specialButton {
+    background-color: #D2691E; /* Chocolate */
+    color: #FFFFFF; /* White text */
+    border: 1px solid #9FB7B9;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton:hover {
+    background-color: #F4A460; /* Sandy Brown, a lighter shade of Chocolate */
+}
+

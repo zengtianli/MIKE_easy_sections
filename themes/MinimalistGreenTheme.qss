@@ -1,4 +1,4 @@
-QWidget {
+/*MinimalistGreenTheme.qss*/QWidget {
     background-color: #F7FFF7;  /* Very light green background */
     color: #1A535C;  /* Deep green text */
 }
@@ -22,3 +22,15 @@ QTextEdit {
     border: 1px solid #56B3B4;
     border-radius: 6px;
 }
+QPushButton#specialButton {
+    background-color: #FF6347; /* Tomato */
+    color: #FFFFFF; /* White text */
+    border: 1px solid #56B3B4;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton:hover {
+    background-color: #FF7F50; /* Coral, a lighter shade of Tomato */
+}
+

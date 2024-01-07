@@ -1,4 +1,4 @@
-QWidget {
+/*RetroWaveTheme.qss*/QWidget {
     background-color: #1A1A1D;  /* Very dark background */
     color: #C3073F;  /* Neon pink text */
 }
@@ -22,3 +22,15 @@ QTextEdit {
     border: 1px solid #950740;
     border-radius: 5px;
 }
+QPushButton#specialButton {
+    background-color: #FF4500; /* Orange Red */
+    color: #FFD700; /* Gold text */
+    border: 1px solid #6F2232;
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin: 4px;
+}
+QPushButton#specialButton:hover {
+    background-color: #FF6347; /* Tomato, a lighter shade of Orange Red */
+}
+

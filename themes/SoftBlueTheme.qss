@@ -1,4 +1,4 @@
-QWidget {
+/*SoftBlueTheme.qss*/QWidget {
     background-color: #EDF1F5;  /* Soft blue background */
     color: #1C2833;  /* Dark text for contrast */
 }
@@ -22,3 +22,15 @@ QTextEdit {
     border: 1px solid #5499C7;
     border-radius: 6px;
 }
+QPushButton#specialButton {
+    background-color: #6495ED; /* Cornflower Blue */
+    color: #154360; /* Dark blue text */
+    border: 1px solid #5499C7;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton:hover {
+    background-color: #87CEFA; /* Light Sky Blue, a lighter shade of Cornflower Blue */
+}
+

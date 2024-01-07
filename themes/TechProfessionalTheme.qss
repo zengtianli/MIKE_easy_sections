@@ -1,4 +1,4 @@
-QWidget {
+/*TechProfessionalTheme.qss*/QWidget {
     background-color: #E5E7E9;  /* Light grey background */
     color: #17202A;  /* Almost black text */
 }
@@ -22,3 +22,15 @@ QTextEdit {
     border: 1px solid #7D879C;
     border-radius: 4px;
 }
+QPushButton#specialButton {
+    background-color: #4682B4; /* Steel Blue */
+    color: #FFFFFF; /* White text */
+    border: 1px solid #7D879C;
+    border-radius: 4px;
+    padding: 7px 14px;
+    margin: 4px;
+}
+QPushButton#specialButton:hover {
+    background-color: #5F9EA0; /* Cadet Blue, a lighter shade of Steel Blue */
+}
+
