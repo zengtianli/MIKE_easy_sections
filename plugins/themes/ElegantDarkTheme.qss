@@ -1,0 +1,36 @@
+/*ElegantDarkTheme.qss*/QWidget {
+    background-color: #34495E;  /* Dark blue-grey background */
+    color: #ECF0F1;  /* Light grey text */
+}
+QPushButton {
+    background-color: #2C3E50;  /* Darker blue-grey */
+    color: #ECF0F1;
+    border: 1px solid #7F8C8D;  /* Grey border */
+    border-radius: 4px;
+    padding: 7px 14px;
+    margin: 4px;
+}
+QPushButton:hover {
+    background-color: #3D566E;  /* Slightly lighter on hover */
+}
+QPushButton:pressed {
+    background-color: #46627F;  /* Even lighter when pressed */
+}
+QTextEdit {
+    background-color: #2C3E50;  /* Matching dark blue-grey */
+    color: #ECF0F1;
+    border: 1px solid #7F8C8D;
+    border-radius: 4px;
+}
+QPushButton#specialButton {
+    background-color: #16A085; /* Sea Green */
+    color: #ECF0F1; /* Light grey text */
+    border: 1px solid #7F8C8D;
+    border-radius: 4px;
+    padding: 7px 14px;
+    margin: 4px;
+}
+QPushButton#specialButton:hover {
+    background-color: #1ABC9C; /* Lighter shade of Sea Green */
+}
+

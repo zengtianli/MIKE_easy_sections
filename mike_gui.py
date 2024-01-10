@@ -1,13 +1,20 @@
 # mike_gui.py
 from PyQt6.QtGui import QKeySequence
 import sys
+import os
 from PyQt6.QtWidgets import (QApplication, QPushButton, QVBoxLayout, QWidget, QMessageBox,
                              QTextEdit, QHBoxLayout, QMenuBar, QMainWindow, QDialog, QLabel, QLineEdit, QKeySequenceEdit)
 from script_executor import (R_xlsx2csv, R_rename_csv, R_mks2chain, R_split_chg,
                              R_insert_chg, R_clean_csv, R_mkcc, R_get_virt_end, R_virt_start, R_virt_end,
                              R_upd_virt_end, R_combine_txt, R_conv_module, R_proc_module, R_virt_sect_mod)
-import theme_manager
+from plugin_loader import load_plugins
+# import theme_manager
 import layout_manager
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+plugins_folder = os.path.join(BASE_DIR, 'plugins')
+
+
 app = QApplication(sys.argv)
 window = QMainWindow()
 window.setWindowTitle('MIKE Easy Section Converter')
@@ -19,6 +26,11 @@ menu_bar = window.menuBar()
 layout_menu = menu_bar.addMenu('Layout')
 output_area = QTextEdit()
 output_area.setReadOnly(True)
+
+plugins_menu = menu_bar.addMenu('Plugins')
+plugins = load_plugins(plugins_folder)  # Replace with your plugin directory
+for plugin in plugins:
+    plugin.initialize(window, plugins_menu)
 
 layout_manager.setup_layout(
     'vertical', central_widget, output_area,
@@ -42,7 +54,7 @@ horizontal_layout_action = layout_menu.addAction('Horizontal Layout')
 horizontal_layout_action.setShortcut(QKeySequence('Ctrl+Alt+K'))
 vertical_layout_action = layout_menu.addAction('Vertical Layout')
 vertical_layout_action.setShortcut(QKeySequence('Ctrl+Alt+J'))
-theme_menu = menu_bar.addMenu('Themes')
+# theme_menu = menu_bar.addMenu('Themes')
 horizontal_layout_action.triggered.connect(
     lambda: layout_manager.set_horizontal_layout(
         central_widget, output_area,
@@ -83,7 +95,7 @@ vertical_layout_action.triggered.connect(
         lambda: R_virt_sect_mod(window, output_area)
     )
 )
-theme_manager.create_theme_actions(window, theme_menu)
-theme_manager.set_default_theme(window)
+# theme_manager.create_theme_actions(window, theme_menu)
+# theme_manager.set_default_theme(window)
 window.show()
 sys.exit(app.exec())

@@ -1,0 +1,36 @@
+/*WarmSunsetTheme.qss*/QWidget {
+    background-color: #FFF5EB;  /* Soft peach background */
+    color: #6E2C00;  /* Deep brown text */
+}
+QPushButton {
+    background-color: #F1948A;  /* Warm pink */
+    color: #FFFFFF;  /* White text */
+    border: 1px solid #D98880;  /* Slightly darker pink border */
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton:hover {
+    background-color: #F5B7B1;  /* Lighter pink on hover */
+}
+QPushButton:pressed {
+    background-color: #EC7063;  /* Rich coral when pressed */
+}
+QTextEdit {
+    background-color: #FDEDEC;  /* Very light pink */
+    color: #6E2C00;
+    border: 1px solid #D98880;
+    border-radius: 6px;
+}
+QPushButton#specialButton {
+    background-color: #DB7093; /* Pale Violet Red */
+    color: #FFFFFF; /* White text */
+    border: 1px solid #D98880;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton:hover {
+    background-color: #FFC0CB; /* Pink, a lighter shade of Pale Violet Red */
+}
+
