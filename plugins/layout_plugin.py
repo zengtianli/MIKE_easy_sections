@@ -1,10 +1,8 @@
-# layout_manager.py
+# layout_plugin.py
 from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QTextEdit, QMessageBox
 from PyQt6.QtGui import QKeySequence
-import layout_v, layout_h
+from plugins.layouts import layout_v, layout_h
 from PyQt6 import sip
-# output_area = QTextEdit()
-# output_area.setReadOnly(True)
 def clear_layout(layout, output_area):
     if layout is not None:
         while layout.count() > 0:
@@ -50,5 +48,4 @@ def add_layout_switch_actions(window, central_widget, output_area):
     vertical_layout_action = layout_menu.addAction('Vertical Layout')
     vertical_layout_action.setShortcut(QKeySequence('Ctrl+Alt+V'))
     vertical_layout_action.triggered.connect(lambda: set_vertical_layout(central_widget, output_area))
-    # Set default layout
     setup_layout('vertical', central_widget, output_area)
