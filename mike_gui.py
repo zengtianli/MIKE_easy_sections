@@ -1,11 +1,9 @@
 # mike_gui.py
 from PyQt6.QtWidgets import QDialog
-from PyQt6.QtGui import QKeySequence
 import sys
 import os
-from PyQt6.QtWidgets import (QApplication, QPushButton, QVBoxLayout, QWidget, QMessageBox, QTextEdit, QHBoxLayout, QMenuBar, QMainWindow, QDialog, QLabel, QLineEdit, QKeySequenceEdit)
+from PyQt6.QtWidgets import (QApplication, QWidget, QTextEdit,QMenuBar, QMainWindow, QDialog)
 from plugin_selection_dialog import PluginSelectionDialog
-from plugins import layout_plugin
 import importlib.util
 import json
 from constants import PLUGIN_CONFIG_FILE
@@ -87,7 +85,7 @@ class MainWindow(QMainWindow):
         plugin_selection_action.triggered.connect(open_plugin_selection)
         plugin_removal_action = self.plugins_menu.addAction('Remove Plugin')
         plugin_removal_action.triggered.connect(open_plugin_removal)
-        setup_layout_menus(self.layout_menu, self, self.central_widget, self.output_area)
+        # setup_layout_menus(self.layout_menu, self, self.central_widget, self.output_area)
 
 def main():
     app = QApplication(sys.argv)

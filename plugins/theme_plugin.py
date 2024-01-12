@@ -35,8 +35,8 @@ class Plugin(PluginInterface):
         with open(theme_path, 'r') as f:
             style_sheet = f.read()
         self.window.setStyleSheet(style_sheet)
-        self.save_theme_config(theme_file)
-    def save_theme_config(self, theme_file):
+        self.save_config(theme_file)
+    def save_config(self, theme_file):
         config_key = 'theme_plugin'  # Plugin name without .py
         config = {}
         if os.path.exists(PLUGIN_CONFIG_FILE):
