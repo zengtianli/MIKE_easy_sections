@@ -1,1 +1,1 @@
-{"plugins": ["layout_plugin.py", "theme_plugin.py"], "layout_plugin": {"saved_setting": "vertical"}, "theme_plugin": {"saved_setting": "AppleDarkLightHybrid.qss"}}
+{"plugins": ["layout_plugin.py", "theme_plugin.py"], "layout_plugin": {"saved_setting": "vertical"}, "theme_plugin": {"saved_setting": "ClassicAppleLight.qss"}}

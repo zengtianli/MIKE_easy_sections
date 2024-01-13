@@ -33,4 +33,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #FF6347; /* Tomato, a lighter shade of Orange Red */
 }
+QPushButton#specialButton2 {
+    background-color: #F39C12; /* Bright Orange */
+    color: #FFFFFF; /* White Text */
+    border: 1px solid #D35400; /* Pumpkin Orange Border */
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin: 4px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #F5B041; /* Lighter Orange on Hover */
+}
 

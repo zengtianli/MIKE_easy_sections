@@ -33,4 +33,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #F4A460; /* Sandy Brown, a lighter shade of Chocolate */
 }
+QPushButton#specialButton2 {
+    background-color: #AF7AC5; /* Lavender */
+    color: #FFFFFF; /* White Text */
+    border: 1px solid #9B59B6; /* Darker Lavender Border */
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #C39BD3; /* Lighter Lavender on Hover */
+}
 

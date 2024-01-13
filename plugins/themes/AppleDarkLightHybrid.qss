@@ -31,3 +31,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #005EA6;  /* Slightly darker blue for hover effect */
 }
+QPushButton#specialButton2 {
+    background-color: #D35400; /* Pumpkin Orange */
+    color: #FFFFFF; /* White Text */
+    border: 1px solid #A04000; /* Darker Orange Border */
+    border-radius: 4px;
+    padding: 7px 14px;
+    margin: 4px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #E59866; /* Lighter Orange on Hover */
+}
+

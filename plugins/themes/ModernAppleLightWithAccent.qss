@@ -30,4 +30,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #20B2AA; /* Lighter shade of Teal */
 }
+QPushButton#specialButton2 {
+    background-color: #58D68D; /* Mint Green */
+    color: #FFFFFF; /* White Text */
+    border: 1px solid #48C9B0; /* Teal Border */
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 6px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #76D7C4; /* Lighter Mint on Hover */
+}
 

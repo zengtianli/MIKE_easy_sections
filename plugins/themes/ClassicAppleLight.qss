@@ -31,4 +31,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #E9967A; /* Darker shade of Light Salmon */
 }
+QPushButton#specialButton2 {
+    background-color: #5499C7; /* Soft Blue */
+    color: #FFFFFF; /* White Text */
+    border: 1px solid #2980B9; /* Darker Blue Border */
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #7FB3D5; /* Lighter Blue on Hover */
+}
 

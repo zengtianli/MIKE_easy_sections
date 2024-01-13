@@ -5,6 +5,7 @@ def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_modul
     con_xlsx_to_csv_button = QPushButton('xlsxToCsv')
     con_csv_rename_button = QPushButton('renameCsv')
     conversion_module_button = QPushButton('Conversion Module')
+    conversion_module_button.setObjectName("specialButton2")
     pro_mks2chainage_button = QPushButton('mkChainCsv')
     pro_mks2chainage_button.setObjectName("specialButton")
     con_xlsx_to_csv_button.setFixedSize(180, 40)
@@ -29,6 +30,7 @@ def create_processing_layout(chg_split_func, chg_insert_func, clean_csv_func, mk
     pro_clean_csv_button = QPushButton('cleanCsv')
     pro_mkcc_button = QPushButton('mkMikeTxt')
     processing_module_button = QPushButton('Processing Module')
+    processing_module_button.setObjectName("specialButton2")
     pro_chg_split_button.setFixedSize(180, 40)
     pro_chg_insert_button.setFixedSize(180, 40)
     pro_clean_csv_button.setFixedSize(180, 40)
@@ -46,6 +48,7 @@ def create_processing_layout(chg_split_func, chg_insert_func, clean_csv_func, mk
     processing_layout.addSpacerItem(QSpacerItem( 40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum))
     processing_layout.addWidget(processing_module_button)
     return processing_layout
+
 def create_virtual_section_layout(get_virtual_end_func, virtual_start_func, virtual_end_func, virtual_end_update_func, combine_files_func, virtual_section_module_func):
     virtual_section_layout = QHBoxLayout()
     virtual_get_end_button = QPushButton('getVirtEnd')
@@ -54,6 +57,7 @@ def create_virtual_section_layout(get_virtual_end_func, virtual_start_func, virt
     virtual_end_update_button = QPushButton('virtEndUpdate')
     vir_combine_files_button = QPushButton('combineTxt')
     virtual_section_module_button = QPushButton('Virtual Section Module')
+    virtual_section_module_button.setObjectName("specialButton2")
     virtual_get_end_button.setFixedSize(180, 40)
     virtual_start_button.setFixedSize(180, 40)
     virtual_end_button.setFixedSize(180, 40)
@@ -73,5 +77,4 @@ def create_virtual_section_layout(get_virtual_end_func, virtual_start_func, virt
     virtual_section_layout.addWidget(vir_combine_files_button)
     virtual_section_layout.addSpacerItem(QSpacerItem( 40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum))
     virtual_section_layout.addWidget(virtual_section_module_button)
-    return virtual_section_layout
     return virtual_section_layout

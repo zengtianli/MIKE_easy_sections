@@ -1,9 +1,10 @@
 # layout_v.py
 from PyQt6.QtWidgets import QPushButton, QVBoxLayout, QTextEdit
 
-def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_module_func, mks2chainage_func):
+def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, mks2chainage_func, conversion_module_func):
     conversion_layout = QVBoxLayout()
     conversion_module_button = QPushButton('Conversion Module')
+    conversion_module_button.setObjectName("specialButton2")
     con_xlsx_to_csv_button = QPushButton('xlsxToCsv')
     con_csv_rename_button = QPushButton('renameCsv')
     con_xlsx_to_csv_button.clicked.connect(xlsx_to_csv_func)
@@ -22,6 +23,7 @@ def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_modul
 def create_processing_layout(chg_split_func, chg_insert_func, clean_csv_func, mkcc_func, processing_module_func):
     processing_layout = QVBoxLayout()
     processing_module_button = QPushButton('Processing Module')
+    processing_module_button.setObjectName("specialButton2")
     pro_chg_split_button = QPushButton('splitChg')
     pro_chg_insert_button = QPushButton('insertChg')
     pro_clean_csv_button = QPushButton('cleanCsv')
@@ -42,6 +44,7 @@ def create_processing_layout(chg_split_func, chg_insert_func, clean_csv_func, mk
 def create_virtual_section_layout(get_virtual_end_func, virtual_start_func, virtual_end_func, virtual_end_update_func, combine_files_func, virtual_section_module_func):
     virtual_section_layout = QVBoxLayout()
     virtual_section_module_button = QPushButton('Virtual Section Module')
+    virtual_section_module_button.setObjectName("specialButton2")
     virtual_get_end_button = QPushButton('getVirtEnd')
     virtual_start_button = QPushButton('virtStart')
     virtual_end_button = QPushButton('virtEnd')

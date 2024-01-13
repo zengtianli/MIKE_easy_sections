@@ -44,7 +44,7 @@ class Plugin(PluginInterface):
         else:  # 'vertical'
             main_layout = QHBoxLayout()
             layout_module = layout_v
-        conversion_layout = layout_module.create_conversion_layout(run_xlsx_to_csv_script, run_csv_rename_script, run_conversion_module, run_mks2chainage_script)
+        conversion_layout = layout_module.create_conversion_layout(run_xlsx_to_csv_script, run_csv_rename_script, run_mks2chainage_script, run_conversion_module)
         processing_layout = layout_module.create_processing_layout(run_chg_split, run_chg_insert, run_clean_csv, run_mkcc, run_processing_module)
         virtual_section_layout = layout_module.create_virtual_section_layout(run_get_virtual_end, run_virtual_start, run_virtual_end, run_virtual_end_update, run_combine_files, run_virtual_section_module)
         for layout in [conversion_layout, processing_layout, virtual_section_layout]:

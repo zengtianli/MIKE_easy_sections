@@ -33,4 +33,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #FFC0CB; /* Pink, a lighter shade of Pale Violet Red */
 }
+QPushButton#specialButton2 {
+    background-color: #CD6155; /* Soft Red */
+    color: #FFFFFF; /* White Text */
+    border: 1px solid #C0392B; /* Darker Red Border */
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #D98880; /* Lighter Red on Hover */
+}
 

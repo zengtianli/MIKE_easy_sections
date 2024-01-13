@@ -55,36 +55,15 @@ def process_file(file_path, csv_file_path):
 #     process_file(input_file_path, output_csv_file)
 #     open_in_excel(output_csv_file)
 
-# def display_in_table(csv_file_path):
-#     app = QApplication(sys.argv)
-#     window = QWidget()
-#     window.setWindowTitle('CSV Viewer')
-#     layout = QVBoxLayout()
-#
-#     table_widget = QTableWidget()
-#     layout.addWidget(table_widget)
-#     window.setLayout(layout)
-#
-#     with open(csv_file_path, 'r', newline='') as file:
-#         csv_data = list(csv.reader(file))
-#         table_widget.setRowCount(len(csv_data))
-#         table_widget.setColumnCount(len(csv_data[0]))
-#         for row_index, row_data in enumerate(csv_data):
-#             for column_index, cell_data in enumerate(row_data):
-#                 table_widget.setItem(row_index, column_index, QTableWidgetItem(cell_data))
-#
-#     window.show()
-#     sys.exit(app.exec())
-
-from PyQt6.QtWidgets import QTableWidget, QTableWidgetItem, QVBoxLayout, QDialog
-
 def display_in_table(csv_file_path):
-    dialog = QDialog()
-    dialog.setWindowTitle('CSV Viewer')
-    layout = QVBoxLayout(dialog)
+    app = QApplication(sys.argv)
+    window = QWidget()
+    window.setWindowTitle('CSV Viewer')
+    layout = QVBoxLayout()
 
     table_widget = QTableWidget()
     layout.addWidget(table_widget)
+    window.setLayout(layout)
 
     with open(csv_file_path, 'r', newline='') as file:
         csv_data = list(csv.reader(file))
@@ -94,8 +73,8 @@ def display_in_table(csv_file_path):
             for column_index, cell_data in enumerate(row_data):
                 table_widget.setItem(row_index, column_index, QTableWidgetItem(cell_data))
 
-    dialog.exec()
-
+    window.show()
+    sys.exit(app.exec())
 
 def main(input_file_path=input_file_path):
     process_file(input_file_path, output_csv_file)

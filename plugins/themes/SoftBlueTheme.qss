@@ -33,4 +33,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #87CEFA; /* Light Sky Blue, a lighter shade of Cornflower Blue */
 }
+QPushButton#specialButton2 {
+    background-color: #F1948A; /* Soft Rose */
+    color: #154360; /* Dark Blue Text */
+    border: 1px solid #EC7063; /* Coral Border */
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #F7DC6F; /* Light Yellow on Hover */
+}
 

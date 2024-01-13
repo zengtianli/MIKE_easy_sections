@@ -33,4 +33,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #FF7F50; /* Coral, a lighter shade of Tomato */
 }
+QPushButton#specialButton2 {
+    background-color: #FFC300; /* Vivid Yellow */
+    color: #1A535C; /* Deep Green Text */
+    border: 1px solid #FFD700; /* Gold Border */
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 5px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #FFD966; /* Lighter Yellow on Hover */
+}
 

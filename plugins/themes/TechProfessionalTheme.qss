@@ -33,4 +33,15 @@ QPushButton#specialButton {
 QPushButton#specialButton:hover {
     background-color: #5F9EA0; /* Cadet Blue, a lighter shade of Steel Blue */
 }
+QPushButton#specialButton2 {
+    background-color: #566573; /* Dark Grey Blue */
+    color: #FFFFFF; /* White Text */
+    border: 1px solid #2C3E50; /* Darker Grey Blue Border */
+    border-radius: 4px;
+    padding: 7px 14px;
+    margin: 4px;
+}
+QPushButton#specialButton2:hover {
+    background-color: #5D6D7E; /* Slightly lighter Grey Blue on Hover */
+}
 
