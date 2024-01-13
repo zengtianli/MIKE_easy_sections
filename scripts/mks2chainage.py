@@ -4,12 +4,9 @@ import subprocess
 import os
 import sys
 import re
-from PyQt6.QtWidgets import QApplication, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget
-
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 input_file_path = os.path.join(BASE_DIR, 'secss.txt')  # 定义输入文件路径
 output_csv_file = os.path.join(BASE_DIR, 'processed_data', 'chainage.csv')
-
 def process_file(file_path, csv_file_path):
     with open(file_path, 'r') as file:
         lines = file.readlines()
@@ -42,64 +39,18 @@ def process_file(file_path, csv_file_path):
                 formatted_chainage = f"chainage_{chainage[0]:02d}"
                 csvwriter.writerow([river_name, '', branch_name, formatted_chainage, chainage[1]])
 
-# def open_in_excel(csv_file_path):
-#     # Open the CSV file in Excel
-#     if sys.platform == "win32":
-#         os.startfile(csv_file_path)  # For Windows
-#     elif sys.platform == "darwin":
-#         subprocess.call(["open", csv_file_path])  # For macOS
-#     else:
-#         subprocess.call(["xdg-open", csv_file_path])  # For Linux
-# def main(input_file_path=input_file_path):
-#     # use this method :csv_files_dir = os.path.join(BASE_DIR, 'processed_data', 'csv_files')
-#     process_file(input_file_path, output_csv_file)
-#     open_in_excel(output_csv_file)
-
-# def display_in_table(csv_file_path):
-#     app = QApplication(sys.argv)
-#     window = QWidget()
-#     window.setWindowTitle('CSV Viewer')
-#     layout = QVBoxLayout()
-#
-#     table_widget = QTableWidget()
-#     layout.addWidget(table_widget)
-#     window.setLayout(layout)
-#
-#     with open(csv_file_path, 'r', newline='') as file:
-#         csv_data = list(csv.reader(file))
-#         table_widget.setRowCount(len(csv_data))
-#         table_widget.setColumnCount(len(csv_data[0]))
-#         for row_index, row_data in enumerate(csv_data):
-#             for column_index, cell_data in enumerate(row_data):
-#                 table_widget.setItem(row_index, column_index, QTableWidgetItem(cell_data))
-#
-#     window.show()
-#     sys.exit(app.exec())
-
-from PyQt6.QtWidgets import QTableWidget, QTableWidgetItem, QVBoxLayout, QDialog
-
-def display_in_table(csv_file_path):
-    dialog = QDialog()
-    dialog.setWindowTitle('CSV Viewer')
-    layout = QVBoxLayout(dialog)
-
-    table_widget = QTableWidget()
-    layout.addWidget(table_widget)
-
-    with open(csv_file_path, 'r', newline='') as file:
-        csv_data = list(csv.reader(file))
-        table_widget.setRowCount(len(csv_data))
-        table_widget.setColumnCount(len(csv_data[0]))
-        for row_index, row_data in enumerate(csv_data):
-            for column_index, cell_data in enumerate(row_data):
-                table_widget.setItem(row_index, column_index, QTableWidgetItem(cell_data))
-
-    dialog.exec()
-
-
+def open_in_excel(csv_file_path):
+    # Open the CSV file in Excel
+    if sys.platform == "win32":
+        os.startfile(csv_file_path)  # For Windows
+    elif sys.platform == "darwin":
+        subprocess.call(["open", csv_file_path])  # For macOS
+    else:
+        subprocess.call(["xdg-open", csv_file_path])  # For Linux
 def main(input_file_path=input_file_path):
+    # use this method :csv_files_dir = os.path.join(BASE_DIR, 'processed_data', 'csv_files')
     process_file(input_file_path, output_csv_file)
-    display_in_table(output_csv_file)
+    open_in_excel(output_csv_file)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
