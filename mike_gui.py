@@ -43,6 +43,7 @@ class PluginManager:
         config['plugins'] = list(self.loaded_plugins.keys())
         with open(PLUGIN_CONFIG_FILE, 'w') as file:
             json.dump(config, file)
+
     def load_plugin_config(self):
         if os.path.exists(PLUGIN_CONFIG_FILE):
             with open(PLUGIN_CONFIG_FILE, 'r') as file:
@@ -56,6 +57,7 @@ class PluginManager:
                     plugin_settings = config.get(plugin_name, {})
                     if plugin_file in self.loaded_plugins:
                         self.loaded_plugins[plugin_file].load_settings(plugin_settings)
+
     def open_plugin_selection(self):
         dialog = PluginSelectionDialog(plugins_folder, self.window)
         if dialog.exec() == QDialog.DialogCode.Accepted:
