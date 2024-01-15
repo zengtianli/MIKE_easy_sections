@@ -51,12 +51,27 @@ class PluginManager:
                 plugin_files = config.get('plugins', [])
                 for plugin_file in plugin_files:
                     self.load_plugin(plugin_file)
-                # After all plugins are loaded, call a method to load their settings
                 for plugin_file in plugin_files:
                     plugin_name = os.path.splitext(plugin_file)[0]
                     plugin_settings = config.get(plugin_name, {})
                     if plugin_file in self.loaded_plugins:
                         self.loaded_plugins[plugin_file].load_settings(plugin_settings)
+    
+    # def load_plugin_config(self):
+    #     if os.path.exists(PLUGIN_CONFIG_FILE):
+    #         with open(PLUGIN_CONFIG_FILE, 'r') as file:
+    #             config = json.load(file)
+    #             plugin_files = config.get('plugins', [])
+    #             for plugin_file in plugin_files:
+    #                 self.load_plugin(plugin_file)
+    #             for plugin_file in plugin_files:
+    #                 plugin_name = os.path.splitext(plugin_file)[0]
+    #                 plugin_settings = config.get(plugin_name, {})
+    #                 if plugin_file in self.loaded_plugins:
+    #                     # Check if the settings are nested under a key like 'saved_setting'
+    #                     if 'saved_setting' in plugin_settings:
+    #                         plugin_settings = plugin_settings['saved_setting']
+    #                     self.loaded_plugins[plugin_file].load_settings(plugin_settings)
 
     def open_plugin_selection(self):
         dialog = PluginSelectionDialog(plugins_folder, self.window)
