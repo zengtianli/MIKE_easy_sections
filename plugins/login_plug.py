@@ -5,6 +5,7 @@ from plugin_interface import PluginInterface
 from constants import PLUGIN_CONFIG_FILE
 import json
 import os
+import bcrypt,base64
 class SignUpDialog(QDialog):
     def __init__(self, register_callback, parent=None):
         super().__init__(parent)
@@ -64,9 +65,51 @@ class Plugin(PluginInterface):
         self.account = None  # Holds account details
         self.users_file = "users.json"  # File to store user data
         self.users = self.load_users()  # Load users from the file
+
     def register_user(self, username, password):
-        self.users[username] = password
+        if not self.is_valid_username(username):
+            QMessageBox.warning(self.window, "Registration Failed", "Invalid username. It should be alphanumeric.")
+            return False
+        if not self.is_valid_password(password):
+            QMessageBox.warning(self.window, "Registration Failed", "Invalid password. It should be at least 8 characters long.")
+            return False
+        if username in self.users:
+            QMessageBox.warning(self.window, "Registration Failed", "User already exists.")
+            return False  # User already exists
+        # Hash the password before saving (to be implemented later)
+        hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+        hashed_password_str = base64.b64encode(hashed_password).decode('utf-8')
+        self.users[username] = hashed_password_str
+        # QMessageBox.information(self.window, "Registration Successful", "You have successfully registered.")
+
+        # Customized message with HTML formatting
+        message = f"Congratulation <b>{username}</b>, you have successfully registered."
+        QMessageBox.information(self.window, "Registration Successful", message)
+        self.save_users()
         return True
+
+    @staticmethod
+    def is_valid_username(username):
+        return username.isalnum()
+    @staticmethod
+    def is_valid_password(password):
+        return len(password) >= 1
+
+    def authenticate_user(self, username, password):
+        user_password_hash_str = self.users.get(username)
+        if user_password_hash_str:
+            user_password_hash = base64.b64decode(user_password_hash_str)
+            if bcrypt.checkpw(password.encode(), user_password_hash):
+                # Successful authentication
+                self.set_account({'username': username})
+                QMessageBox.information(self.window, "Login Success", "You are now logged in.")
+                self.save_config()
+                return True
+
+        # Authentication failed
+        QMessageBox.warning(self.window, "Login Failed", "Incorrect username or password. Please try again.")
+        return False
+
     def initialize(self, window: QMainWindow, menu: QMenuBar):
         self.window = window
         self.create_login_menu(menu)
@@ -85,20 +128,19 @@ class Plugin(PluginInterface):
     def show_login_dialog(self):
         dialog = LoginDialog(self.authenticate_user, self.window)
         dialog.exec()
-    def authenticate_user(self, username, password):
-        if username == "admin" and password == "a":
-            self.set_account({'username': username})
-            print("Account set, now saving...")  # Debugging print
-            self.save_config()
-            return True
-        else:
-            return False
+
+
+    # def authenticate_user(self, username, password):
+    #     if username == "admin" and password == "a":
+    #         self.set_account({'username': username})
+    #         print("Account set, now saving...")  # Debugging print
+    #         self.save_config()
+    #         return True
+    #     else:
+    #         return False
+
     def deinitialize(self, window, menu):
         menu.removeAction(self.login_menu.menuAction())
-    def set_account(self, account_info):
-        self.account = account_info
-        self.update_user_menu(account_info['username'])  # Update the menu with the user's name
-        self.save_config()
     def set_account(self, account_info):
         self.account = account_info
         self.update_user_menu(account_info['username'])  # Update the menu with the user's name
@@ -123,17 +165,6 @@ class Plugin(PluginInterface):
         config[config_key] = {'saved_setting': self.account}
         with open(PLUGIN_CONFIG_FILE, 'w') as file:
             json.dump(config, file)
-
-    # def load_settings(self):
-    #     if os.path.exists(PLUGIN_CONFIG_FILE):
-    #         with open(PLUGIN_CONFIG_FILE, 'r') as file:
-    #             config = json.load(file)
-    #             plugin_config = config.get('login_plugin', {})
-    #             self.account = plugin_config.get('saved_setting')
-    #             if self.account and 'username' in self.account:
-    #                 # Update the user menu with the saved username
-    #                 self.update_user_menu(self.account['username'])
-
     def load_settings(self, settings=None):
         if settings is not None:
             self.account = settings.get('saved_setting', {})
@@ -158,12 +189,6 @@ class Plugin(PluginInterface):
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return {}  # Return an empty dictionary if file doesn't exist or is empty
-    def register_user(self, username, password):
-        if username in self.users:
-            return False  # User already exists
-        self.users[username] = password  # Add the new user
-        self.save_users()  # Save updated users list
-        return True
     def save_users(self):
         with open(self.users_file, 'w') as file:
             json.dump(self.users, file)
