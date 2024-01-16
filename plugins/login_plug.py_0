@@ -1,11 +1,13 @@
-from PyQt6.QtWidgets import QMenuBar, QMainWindow,QMessageBox
+#login_plug.py
+from PyQt6.QtWidgets import QMenuBar, QMainWindow, QMessageBox
 from PyQt6.QtGui import QAction
 from plugin_interface import PluginInterface
 from constants import PLUGIN_CONFIG_FILE
-import json
-import os,sys
+import json,sys
+import os
+from plugins.login.user_manager import UserManager
 from plugins.login.login_dialogs import SignUpDialog, LoginDialog, ForgetPasswordDialog, ChangePasswordDialog
-from plugins.login.user_manager import UserManager  # Import UserManager
+
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 users_file = os.path.join(BASE_DIR, 'plugins', 'login', 'users.json')
 class Plugin(PluginInterface):
@@ -24,6 +26,9 @@ class Plugin(PluginInterface):
     def show_signup_dialog(self):
         dialog = SignUpDialog(self.user_manager.register_user, self.window)
         dialog.exec()
+    def show_forget_password_dialog(self):
+        dialog = ForgetPasswordDialog(self.user_manager.reset_password, self.window)
+        dialog.exec()
     def show_login_dialog(self):
         dialog = LoginDialog(self.authenticate_user, self.handle_forget_password, self.window)
         dialog.exec()
@@ -33,9 +38,6 @@ class Plugin(PluginInterface):
             dialog.exec()
         else:
             QMessageBox.warning(self.window, "Error", "No user is currently logged in.")
-    def show_forget_password_dialog(self):
-        dialog = ForgetPasswordDialog(self.user_manager.reset_password, self.window)
-        dialog.exec()
     def handle_forget_password(self):
         self.show_forget_password_dialog()
     def authenticate_user(self, username, password):
@@ -72,6 +74,7 @@ class Plugin(PluginInterface):
         config[config_key] = {'saved_setting': self.account}
         with open(PLUGIN_CONFIG_FILE, 'w') as file:
             json.dump(config, file)
+
     def load_settings(self, settings=None):
         if settings is not None:
             self.account = settings.get('saved_setting', {})
@@ -85,6 +88,7 @@ class Plugin(PluginInterface):
                     self.account = plugin_config.get('saved_setting')
                     if self.account and 'username' in self.account:
                         self.update_user_menu(self.account['username'])
+
     def logout(self):
         self.account = None
         self.update_user_menu('')

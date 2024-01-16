@@ -1,8 +1,5 @@
 from PyQt6.QtWidgets import QDialog, QLineEdit, QPushButton, QVBoxLayout, QLabel, QMenuBar, QMainWindow,QMessageBox
 from PyQt6.QtGui import QAction
-from plugin_interface import PluginInterface
-from constants import PLUGIN_CONFIG_FILE
-# Add this to your login_dialogs.py file
 class SignUpDialog(QDialog):
     def __init__(self, register_callback, parent=None):
         super().__init__(parent)
@@ -30,10 +27,12 @@ class SignUpDialog(QDialog):
         if password != password_confirm:
             QMessageBox.warning(self, "Sign Up Failed", "Passwords do not match.")
             return
-        if self.register_callback(username, password):
+        success, message = self.register_callback(username, password)
+        if success:
+            QMessageBox.information(self, "Registration Successful", message)
             self.accept()
         else:
-            QMessageBox.warning(self, "Sign Up Failed", "Could not create account.")
+            QMessageBox.warning(self, "Sign Up Failed", message)
 class LoginDialog(QDialog):
     def __init__(self, authenticate_callback, forget_password_callback, parent=None):
         super().__init__(parent)
@@ -62,7 +61,7 @@ class LoginDialog(QDialog):
         if self.authenticate_callback(username, password):
             self.accept()  # Close the dialog only on successful login
         else:
-            QMessageBox.warning(self, "Login Failed", "Incorrect username or password. Please try again.")
+            pass
     def handle_forget_password(self):
         self.forget_password_callback()
 class ForgetPasswordDialog(QDialog):
@@ -79,8 +78,12 @@ class ForgetPasswordDialog(QDialog):
         layout.addWidget(reset_button)
     def handle_reset_password(self):
         username = self.username_edit.text()
-        if self.reset_password_callback(username):
+        success, message = self.reset_password_callback(username)
+        if success:
+            QMessageBox.information(self, "Reset Password", message)
             self.accept()
+        else:
+            QMessageBox.warning(self, "Reset Password Failed", message)
 class ChangePasswordDialog(QDialog):
     def __init__(self, change_password_callback, parent=None):
         super().__init__(parent)
@@ -109,4 +112,9 @@ class ChangePasswordDialog(QDialog):
         if new_password != confirm_new_password:
             QMessageBox.warning(self, "Change Password Failed", "New passwords do not match.")
             return
-        self.change_password_callback(old_password, new_password)
+        success, message = self.change_password_callback(old_password, new_password)
+        if success:
+            QMessageBox.information(self, "Change Password", message)
+            self.accept()
+        else:
+            QMessageBox.warning(self, "Change Password Failed", message)
