@@ -1,18 +1,1 @@
-{
-	"plugins": [
-		"layout_plugin.py",
-		"theme_plugin.py",
-		"login_plug.py"
-	],
-	"layout_plugin": {
-		"saved_setting": "vertical"
-	},
-	"theme_plugin": {
-		"saved_setting": "AppleDarkLightHybrid.qss"
-	},
-	"login_plugin": {
-		"saved_setting": {
-			"username": "admin"
-		}
-	}
-}
+{"plugins": ["layout_plugin.py", "theme_plugin.py", "login_plug.py"], "layout_plugin": {"saved_setting": "vertical"}, "theme_plugin": {"saved_setting": "AppleDarkLightHybrid.qss"}, "login_plugin": {"saved_setting": {"username": "b"}}}
