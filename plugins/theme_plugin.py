@@ -1,3 +1,4 @@
+# theme_plugin.py
 # plugins/theme_plugin.py
 from PyQt6.QtGui import QAction
 from plugin_interface import PluginInterface

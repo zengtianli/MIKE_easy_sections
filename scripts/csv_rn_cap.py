@@ -1,3 +1,4 @@
+# csv_rn_cap.py
 import os
 from pypinyin import lazy_pinyin, Style
 import sys

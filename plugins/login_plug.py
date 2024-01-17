@@ -1,3 +1,4 @@
+# login_plug.py
 from PyQt6.QtWidgets import QMenuBar, QMainWindow, QMessageBox
 from PyQt6.QtGui import QAction
 from plugin_interface import PluginInterface

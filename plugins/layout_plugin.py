@@ -1,4 +1,5 @@
 # layout_plugin.py
+# layout_plugin.py
 from PyQt6.QtGui import QAction, QKeySequence
 from PyQt6.QtWidgets import QMainWindow, QTextEdit
 from plugin_interface import PluginInterface
