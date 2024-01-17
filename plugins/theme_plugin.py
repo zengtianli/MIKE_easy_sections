@@ -4,13 +4,31 @@ from plugin_interface import PluginInterface
 import os,json
 from constants import PLUGIN_CONFIG_FILE
 class Plugin(PluginInterface):
+    """
+    A plugin class that handles theme customization for the application.
+    """
+
     def initialize(self, window, menu):
         self.window = window
         self.create_theme_menu(menu)
+    
     def create_theme_menu(self, menu):
+        """
+        Creates a 'Themes' menu in the application menu bar.
+
+        Parameters:
+        - menu: The menu bar to add the 'Themes' menu to.
+        """
         theme_menu = menu.addMenu('Themes')
         self.create_theme_actions(theme_menu)
+    
     def create_theme_actions(self, theme_menu):
+        """
+        Creates theme actions for each available theme and adds them to the 'Themes' menu.
+
+        Parameters:
+        - theme_menu: The 'Themes' menu to add the theme actions to.
+        """
         themes_info = [
             ('Apple Dark Light Hybrid', 'AppleDarkLightHybrid.qss', 'Ctrl+1'),
             ('Classic Apple Light', 'ClassicAppleLight.qss', 'Ctrl+2'),
@@ -29,14 +47,28 @@ class Plugin(PluginInterface):
             theme_action.triggered.connect(
                 lambda checked, file=theme_file: self.set_theme(file))
             theme_menu.addAction(theme_action)
+    
     def set_theme(self, theme_file):
+        """
+        Sets the application theme based on the selected theme file.
+
+        Parameters:
+        - theme_file: The file name of the selected theme.
+        """
         theme_folder = os.path.join(os.path.dirname(__file__), 'themes')
         theme_path = os.path.join(theme_folder, theme_file)
         with open(theme_path, 'r') as f:
             style_sheet = f.read()
         self.window.setStyleSheet(style_sheet)
         self.save_config(theme_file)
+    
     def save_config(self, theme_file):
+        """
+        Saves the selected theme configuration to a config file.
+
+        Parameters:
+        - theme_file: The file name of the selected theme.
+        """
         config_key = 'theme_plugin'  # Plugin name without .py
         config = {}
         if os.path.exists(PLUGIN_CONFIG_FILE):
@@ -45,10 +77,25 @@ class Plugin(PluginInterface):
         config[config_key] = {'saved_setting': theme_file}
         with open(PLUGIN_CONFIG_FILE, 'w') as file:
             json.dump(config, file)
+    
     def load_settings(self, settings):
+        """
+        Loads the saved theme settings.
+
+        Parameters:
+        - settings: The saved theme settings.
+        """
         if 'saved_setting' in settings:
             self.set_theme(settings['saved_setting'])
+    
     def deinitialize(self, window, menu):
+        """
+        Deinitializes the plugin by removing the 'Themes' menu from the menu bar.
+
+        Parameters:
+        - window: The application window.
+        - menu: The menu bar.
+        """
         # Find and remove the 'Themes' menu from the menu bar
         for action in menu.actions():
             if action.text() == 'Themes':
