@@ -27,6 +27,18 @@ def load_chainage_data(chainage_file):
 
 
 def process_section_file(section_file, chainage_data, output_dir, prefix):
+    """
+    Process the section file by inserting additional rows based on the chainage data.
+
+    Args:
+        section_file (str): The path to the section file.
+        chainage_data (dict): A dictionary containing chainage data for each section.
+        output_dir (str): The directory where the output files will be saved.
+        prefix (str): The prefix to be added to the output file names.
+
+    Returns:
+        None
+    """
     with open(section_file, mode='r', encoding='utf-8') as file:
         reader = list(csv.reader(file))
     output_data = {}
@@ -40,7 +52,8 @@ def process_section_file(section_file, chainage_data, output_dir, prefix):
                 output_data[branch].append(row)  # 添加断面名称行
                 output_data[branch].append(
                     [f"{current_section},{branch},{chainage_n},{chainage_v}"])  # 添加chainage行
-        elif row: output_data[branch].append(row)  # 添加其他数据行
+        elif row:
+            output_data[branch].append(row)  # 添加其他数据行
     for branch, data in output_data.items():
         output_file = os.path.join(
             output_dir, f"{prefix}_{branch}.csv")
@@ -50,6 +63,19 @@ def process_section_file(section_file, chainage_data, output_dir, prefix):
 
 
 def main():
+    """
+    Main function to process section files and insert chainage data.
+
+    This function reads section files from the input directory, retrieves the corresponding chainage data,
+    and processes the section files by inserting the chainage data. The processed files are then stored in
+    the output directory.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     input_dir = os.path.join(BASE_DIR, 'processed_data', 'csv_sections')
     chainage_files_dir = os.path.join(BASE_DIR, 'processed_data', 'chg_files')
     output_dir = os.path.join(BASE_DIR,  'processed_data', 'inserted_files')
@@ -72,4 +98,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -6,6 +6,16 @@ BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def clean_csv(input_file, output_file):
+    """
+    Cleans a CSV file by removing unwanted rows based on specific conditions.
+
+    Args:
+        input_file (str): The path to the input CSV file.
+        output_file (str): The path to the output cleaned CSV file.
+
+    Returns:
+        None
+    """
     with open(input_file, mode='r', encoding='utf-8') as infile:
         reader = csv.reader(infile)
 
@@ -31,6 +41,9 @@ def clean_csv(input_file, output_file):
 
 
 def main():
+    """
+    Main function to clean CSV files in the input directory and save the cleaned data to the output directory.
+    """
     input_dir = os.path.join(BASE_DIR, 'processed_data', 'inserted_files')
     output_dir = os.path.join(BASE_DIR,  'processed_data', 'inst_cle_files')
 

@@ -14,6 +14,24 @@ chainage_map = {f"{row['river'].split('_')[0]}_{row['branch']}.txt": row['chaina
                 for index, row in df.iterrows()}
 # 遍历每个文件
 def main():
+    """
+    Update the section data in the specified files.
+
+    This function iterates through the `chainage_map` dictionary, which contains the mapping of
+    text file names to new chainage values. For each file, it reads the content, locates the target
+    line to be updated, replaces the content, and writes the updated content back to the file.
+
+    If a file is not found or if the number of separators in the file is insufficient, a message is
+    printed and the file is skipped.
+
+    After processing all the files, a completion message is printed.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
     for txt_filename, new_chainage in chainage_map.items():
         input_path = os.path.join(input_folder, txt_filename)
         output_path = os.path.join(output_folder, txt_filename)

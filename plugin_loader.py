@@ -2,8 +2,17 @@
 import os
 import importlib.util
 
-
 def load_plugins(plugin_directory):
+    """
+    Load plugins from the specified directory.
+
+    Args:
+        plugin_directory (str): The directory path where the plugins are located.
+
+    Returns:
+        list: A list of instantiated plugin objects.
+
+    """
     plugins = []
     for filename in os.listdir(plugin_directory):
         if filename.endswith('.py') and not filename.startswith('__'):

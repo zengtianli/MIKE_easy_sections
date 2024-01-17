@@ -1,6 +1,18 @@
 # layout_h1.py
 from PyQt6.QtWidgets import QPushButton, QHBoxLayout, QVBoxLayout, QWidget, QSizePolicy, QSpacerItem, QTextEdit
 def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_module_func,mks2chainage_func):
+    """
+    Creates a QHBoxLayout for the conversion layout.
+
+    Args:
+        xlsx_to_csv_func: Function to be executed when xlsx_to_csv_button is clicked.
+        csv_rename_func: Function to be executed when con_csv_rename_button is clicked.
+        conversion_module_func: Function to be executed when conversion_module_button is clicked.
+        mks2chainage_func: Function to be executed when pro_mks2chainage_button is clicked.
+
+    Returns:
+        QHBoxLayout: The conversion layout with the buttons and their respective connections.
+    """
     conversion_layout = QHBoxLayout()
     con_xlsx_to_csv_button = QPushButton('xlsxToCsv')
     con_csv_rename_button = QPushButton('renameCsv')
@@ -24,6 +36,19 @@ def create_conversion_layout(xlsx_to_csv_func, csv_rename_func, conversion_modul
     return conversion_layout
 
 def create_processing_layout(chg_split_func, chg_insert_func, clean_csv_func, mkcc_func, processing_module_func):
+    """
+    Create a QHBoxLayout for the processing layout.
+
+    Args:
+        chg_split_func (function): Function to be called when the 'splitChg' button is clicked.
+        chg_insert_func (function): Function to be called when the 'insertChg' button is clicked.
+        clean_csv_func (function): Function to be called when the 'cleanCsv' button is clicked.
+        mkcc_func (function): Function to be called when the 'mkMikeTxt' button is clicked.
+        processing_module_func (function): Function to be called when the 'Processing Module' button is clicked.
+
+    Returns:
+        QHBoxLayout: The created QHBoxLayout for the processing layout.
+    """
     processing_layout = QHBoxLayout()
     pro_chg_split_button = QPushButton('splitChg')
     pro_chg_insert_button = QPushButton('insertChg')
@@ -48,7 +73,22 @@ def create_processing_layout(chg_split_func, chg_insert_func, clean_csv_func, mk
     processing_layout.addWidget(pro_mkcc_button)
     processing_layout.addSpacerItem(QSpacerItem( 40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum))
     return processing_layout
+
 def create_virtual_section_layout(get_virtual_end_func, virtual_start_func, virtual_end_func, virtual_end_update_func, combine_files_func, virtual_section_module_func):
+    """
+    Creates a QHBoxLayout for the virtual section layout.
+
+    Args:
+        get_virtual_end_func: Function to be called when the 'getVirtEnd' button is clicked.
+        virtual_start_func: Function to be called when the 'virtStart' button is clicked.
+        virtual_end_func: Function to be called when the 'virtEnd' button is clicked.
+        virtual_end_update_func: Function to be called when the 'virtEndUpdate' button is clicked.
+        combine_files_func: Function to be called when the 'combineTxt' button is clicked.
+        virtual_section_module_func: Function to be called when the 'Virtual Section Module' button is clicked.
+
+    Returns:
+        QHBoxLayout: The created QHBoxLayout for the virtual section layout.
+    """
     virtual_section_layout = QHBoxLayout()
     virtual_get_end_button = QPushButton('getVirtEnd')
     virtual_start_button = QPushButton('virtStart')

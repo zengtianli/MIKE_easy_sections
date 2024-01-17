@@ -8,6 +8,10 @@ BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def combine_files():
+    """
+    Combines all the text files in the './processed_data/txt_virtual_end/' directory
+    into a single file named 'combined.txt' in the './processed_data/' directory.
+    """
     if os.path.isfile('./processed_data/combined.txt'):
         os.remove('./processed_data/combined.txt')
     with open('./combined.txt', 'w') as outfile:

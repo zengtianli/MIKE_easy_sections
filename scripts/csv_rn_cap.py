@@ -6,6 +6,15 @@ BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def get_pinyin_initials(text):
+    """
+    Get the initials of the pinyin representation of the given text.
+
+    Args:
+        text (str): The input text.
+
+    Returns:
+        str: The initials of the pinyin representation of the text.
+    """
     initials = []
     for char in text:
         # 对每个字符单独处理多音字
@@ -21,6 +30,15 @@ def get_pinyin_initials(text):
 
 
 def rename_files(directory):
+    """
+    Renames files in the specified directory by removing the substring '断面测量数据表' from the filename.
+
+    Args:
+        directory (str): The directory path where the files are located.
+
+    Returns:
+        None
+    """
     for filename in os.listdir(directory):
         if filename.endswith("断面测量数据表.csv"):
             new_filename = filename.replace("断面测量数据表", "").strip()
@@ -31,6 +49,15 @@ def rename_files(directory):
 
 
 def rename_files_to_pinyin(directory):
+    """
+    Renames all CSV files in the specified directory to include the pinyin initials of the second part of the filename.
+
+    Args:
+        directory (str): The directory path where the CSV files are located.
+
+    Returns:
+        None
+    """
     for filename in os.listdir(directory):
         if filename.endswith(".csv"):
             parts = filename.split('_')
@@ -44,6 +71,10 @@ def rename_files_to_pinyin(directory):
 
 
 def main():
+    """
+    This function is the entry point of the script.
+    It renames files in the csv_sections directory and then renames them to pinyin.
+    """
     csv_sections_dir = os.path.join(BASE_DIR, 'processed_data', 'csv_sections')
     rename_files(csv_sections_dir)
     rename_files_to_pinyin(csv_sections_dir)

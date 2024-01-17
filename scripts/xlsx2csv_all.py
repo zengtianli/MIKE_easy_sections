@@ -8,6 +8,16 @@ BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def xlsx_to_csv(xlsx_file_path, csv_file_path):
+    """
+    Convert an Excel file to a CSV file.
+
+    Parameters:
+    xlsx_file_path (str): The path to the Excel file.
+    csv_file_path (str): The path to save the CSV file.
+
+    Returns:
+    None
+    """
     # 读取 Excel 文件
     df = pd.read_excel(xlsx_file_path)
 
@@ -16,7 +26,18 @@ def xlsx_to_csv(xlsx_file_path, csv_file_path):
 
 
 def copy_csv_files(src_dir, dst_dir, pattern):
-    # 确保目标目录存在
+    """
+    Copy CSV files from the source directory to the destination directory.
+
+    Args:
+        src_dir (str): The path to the source directory.
+        dst_dir (str): The path to the destination directory.
+        pattern (str): The file name pattern to match for copying.
+
+    Returns:
+        None
+    """
+    # Ensure the destination directory exists
     os.makedirs(dst_dir, exist_ok=True)
 
     for dirpath, dirnames, filenames in os.walk(src_dir):
@@ -28,6 +49,18 @@ def copy_csv_files(src_dir, dst_dir, pattern):
 
 
 def main():
+    """
+    Convert all XLSX files in the resources directory to CSV format and copy specific CSV files to another directory.
+
+    This function iterates through all XLSX files in the resources directory and converts them to CSV format using the xlsx_to_csv function.
+    It then copies specific CSV files to the csv_sections directory.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     # 输入和输出目录都设置为 BASE_DIR 下的相应子目录
     resources_dir = os.path.join(BASE_DIR, 'resources')
     csv_files_dir = os.path.join(BASE_DIR, 'processed_data', 'csv_files')

@@ -8,7 +8,14 @@ csv_folder = os.path.join(BASE_DIR, 'processed_data', 'inst_cle_files')
 
 
 def parse_csv_line(row):
-    """解析CSV文件中的一行，返回坐标值和标签"""
+    """解析CSV文件中的一行，返回坐标值和标签
+
+    Args:
+        row (list): 一行CSV数据
+
+    Returns:
+        tuple: 包含坐标值的元组，格式为 (x, y)
+    """
     # 定义缺省值为0.0
     default_value = 0.0
     x = row[5].strip() if row[5].strip() else default_value
@@ -17,7 +24,15 @@ def parse_csv_line(row):
 
 
 def assign_tags(coordinates):
-    """为坐标点分配标签"""
+    """为坐标点分配标签
+
+    Args:
+        coordinates (list): A list of coordinate tuples (x, y).
+
+    Returns:
+        list: A list of tuples containing the coordinates and their assigned tags.
+
+    """
     if not coordinates:
         return []
     min_x = min(coordinates, key=lambda c: c[0])
@@ -38,7 +53,16 @@ def assign_tags(coordinates):
 
 
 def format_txt_section(branch, chainage, coordinates):
-    """将提取的数据格式化为TXT文件所需的格式"""
+    """将提取的数据格式化为TXT文件所需的格式
+
+    Args:
+        branch (str): The branch name.
+        chainage (float): The chainage value.
+        coordinates (list): A list of coordinates.
+
+    Returns:
+        str: The formatted section in TXT file format.
+    """
     formatted_lines = [
         branch,
         branch,
@@ -76,6 +100,16 @@ def format_txt_section(branch, chainage, coordinates):
 
 
 def convert_csv_to_txt(csv_path, txt_path):
+    """
+    Convert a CSV file to a TXT file containing formatted section data.
+
+    Args:
+        csv_path (str): The path to the input CSV file.
+        txt_path (str): The path to the output TXT file.
+
+    Returns:
+        None
+    """
     branch = os.path.basename(csv_path).split(
         '_')[1].split('.')[0]  # 提取文件名中的分支名称
     with open(csv_path, 'r') as csv_file, open(txt_path, 'w') as txt_file:
@@ -102,6 +136,19 @@ def convert_csv_to_txt(csv_path, txt_path):
 import glob
 
 def main():
+    """
+    Converts CSV files to TXT files.
+
+    This function searches for CSV files in a specified folder, converts each CSV file to a TXT file,
+    and saves the converted files in a separate folder. The function also prints the conversion status
+    for each file.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     csv_files = glob.glob(csv_folder + '/*.csv')
     for csv_file in csv_files:
         txt_file = csv_file.replace('.csv', '.txt')

@@ -7,6 +7,16 @@ input_dir = os.path.join(BASE_DIR, 'processed_data', 'txt_files')
 output_dir = os.path.join(BASE_DIR, 'processed_data', 'txt_virtual_start')
 
 def insert_virtual_section(input_file, output_dir):
+    """
+    Inserts a virtual section at the beginning of the file.
+
+    Args:
+        input_file (str): The path to the input file.
+        output_dir (str): The directory where the modified file will be saved.
+
+    Returns:
+        None
+    """
     # 读取原始文件内容
     with open(input_file, 'r', encoding='utf-8') as file:
         lines = file.readlines()
@@ -37,12 +47,25 @@ def insert_virtual_section(input_file, output_dir):
 
 
 def process_directory(input_dir, output_dir):
+    """
+    Process all the text files in the input directory and insert virtual sections into the output directory.
+
+    Args:
+        input_dir (str): The path to the input directory.
+        output_dir (str): The path to the output directory.
+
+    Returns:
+        None
+    """
     # 获取目录下所有文件
     for input_file in glob.glob(os.path.join(input_dir, '*.txt')):
         insert_virtual_section(input_file, output_dir)
 
 
 def main():
+    """
+    This is the main function that processes the input directory and creates the output directory if it doesn't exist.
+    """
     # input_dir = "../processed_data/txt_files"
     # output_dir = "../processed_data/txt_virtual_start"
     if not os.path.exists(output_dir):

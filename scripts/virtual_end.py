@@ -17,27 +17,31 @@ df = pd.read_csv(readcsvfile, header=None,
 
 
 def main():
+    """
+    Process the .txt files in the input folder, extract the last complete section data,
+    and append it to the corresponding output file in the output folder.
+    """
     for index, row in df.iterrows():
         txt_filename = f"{row['river'].split('_')[0]}_{row['branch']}.txt"
         input_path = os.path.join(input_folder, txt_filename)
-        print('input',input_path)
+        print('input', input_path)
         output_path = os.path.join(output_folder, txt_filename)
-        print('output',output_path)
+        print('output', output_path)
         try:
-            # 打开并读取对应的.txt文件
+            # Open and read the corresponding .txt file
             with open(input_path, 'r', encoding='utf-8') as file:
                 data = file.read()
-            # 分割断面数据
+            # Split the section data
             sections = data.split('*******************************')
-            last_section = sections[-2].strip()  # 获取最后一个完整的断面数据并移除首尾空白字符
-            # 将最后一个断面数据复制并追加到文件末尾
+            last_section = sections[-2].strip()  # Get the last complete section data and remove leading/trailing whitespace
+            # Copy and append the last section data to the end of the file
             with open(output_path, 'w', encoding='utf-8') as file:
                 file.write(data + '\n' + last_section +
                            '\n*******************************\n')
-            print(f"{txt_filename}: 断面数据已成功追加。")
+            print(f"{txt_filename}: Section data successfully appended.")
         except FileNotFoundError:
-            print(f"{txt_filename}: 文件未找到。")
-    print("所有操作已完成。")
+            print(f"{txt_filename}: File not found.")
+    print("All operations completed.")
 
 
 if __name__ == '__main__':

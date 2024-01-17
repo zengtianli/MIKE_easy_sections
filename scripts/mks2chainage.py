@@ -9,16 +9,38 @@ BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 input_file_path = os.path.join(BASE_DIR, 'secss.txt')  # 定义输入文件路径
 output_csv_file = os.path.join(BASE_DIR, 'processed_data', 'chainage.csv')
 
+
 def auto_virtual_add(data):
+    """
+    Add 'virtual' to the start and end of chainages in the given data.
+
+    Args:
+        data (dict): A dictionary containing branch names as keys and chainages as values.
+
+    Returns:
+        dict: The updated data dictionary with 'virtual' added to the start and end of chainages.
+    """
     for branch_name, chainages in data.items():
         if len(chainages) > 1:  # Check if there are at least two chainages
-            chainages[0] = (*chainages[0], 'virtual')  # Add 'virtual' to the start
-            chainages[-1] = (*chainages[-1], 'virtual')  # Add 'virtual' to the end
+            # Add 'virtual' to the start
+            chainages[0] = (*chainages[0], 'virtual')
+            # Add 'virtual' to the end
+            chainages[-1] = (*chainages[-1], 'virtual')
         elif len(chainages) == 1:  # If there's only one chainage
-            chainages[0] = (*chainages[0], 'virtual')  # Add 'virtual' to the only chainage
+            # Add 'virtual' to the only chainage
+            chainages[0] = (*chainages[0], 'virtual')
     return data
 
+
 def process_file(file_path, csv_file_path, use_auto_virtual_add=False):
+    """
+    Process the input file and generate a CSV file with chainage data.
+
+    Args:
+        file_path (str): The path to the input file.
+        csv_file_path (str): The path to the output CSV file.
+        use_auto_virtual_add (bool, optional): Flag indicating whether to use auto virtual add. Defaults to False.
+    """
     with open(file_path, 'r') as file:
         lines = file.readlines()
     data = {}
@@ -44,7 +66,8 @@ def process_file(file_path, csv_file_path, use_auto_virtual_add=False):
         data = auto_virtual_add(data)
     with open(csv_file_path, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(['river', 'sections', 'branch', 'chainage_n', 'chainage_v'])
+        csvwriter.writerow(['river', 'sections', 'branch',
+                           'chainage_n', 'chainage_v'])
         for branch_name, chainages in data.items():
             branch_base = re.sub(r'\d+', '', branch_name)
             river_name = branch_numbers.get(branch_base, "")
@@ -52,9 +75,20 @@ def process_file(file_path, csv_file_path, use_auto_virtual_add=False):
                 chainage_count, chainage_number, *sections = chainage
                 sections_value = sections[0] if sections else ""
                 formatted_chainage = f"chainage_{chainage_count:02d}"
-                csvwriter.writerow([river_name, sections_value, branch_name, formatted_chainage, chainage_number])
+                csvwriter.writerow(
+                    [river_name, sections_value, branch_name, formatted_chainage, chainage_number])
+
 
 def open_in_excel(csv_file_path):
+    """
+    Opens the given CSV file in Excel.
+
+    Parameters:
+    csv_file_path (str): The path to the CSV file.
+
+    Returns:
+    None
+    """
     # Open the CSV file in Excel
     if sys.platform == "win32":
         os.startfile(csv_file_path)  # For Windows
@@ -63,11 +97,22 @@ def open_in_excel(csv_file_path):
     else:
         subprocess.call(["xdg-open", csv_file_path])  # For Linux
 
+
 def main(input_file=input_file_path):
+    """
+    Main function to process the input file and generate output.
+
+    Args:
+        input_file (str): Path to the input file.
+
+    Returns:
+        None
+    """
     msgBox = QMessageBox()
     msgBox.setWindowTitle("Process File")
     msgBox.setText("Do you want to automatically add 'virtual' to chainages?")
-    msgBox.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+    msgBox.setStandardButtons(
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
     result = msgBox.exec()
 
     use_auto_virtual_add = result == QMessageBox.StandardButton.Yes
@@ -75,8 +120,7 @@ def main(input_file=input_file_path):
     process_file(input_file, output_csv_file, use_auto_virtual_add)
     open_in_excel(output_csv_file)
 
-    # process_file(input_file, output_csv_file, use_auto_virtual_add=False)
-    # open_in_excel(output_csv_file)
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Usage: python mks2chainage.py <input_file>")
